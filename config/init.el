@@ -31,7 +31,7 @@
 (configure-column-mode)
 (configure-weird-behaviors)
 (install-packages
- 'clojure-mode
+ 'cider
  'magit
  'rainbow-mode
  'terraform-mode
