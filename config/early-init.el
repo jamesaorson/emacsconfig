@@ -2,13 +2,16 @@
   (setq vc-follow-symlinks t))
 
 (defun install-packages ()
-  (when
-      (eq (getenv "EMACS_INSTALL_PACKAGES") "1")
+  (unless
+      (and
+       (package-installed-p 'magit)
+       (package-installed-p 'clojure-mode))
     (require 'package)
     (add-to-list 'package-archives
 		 '("melpa" . "https://melpa.org/packages/") t)
     (package-refresh-contents)
-    (package-install 'magit)))
+    (package-install 'magit)
+    (package-install 'clojure-mode)))
 
 (configure-weird-behaviors)
 (install-packages)
