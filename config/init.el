@@ -13,6 +13,20 @@
   (setq display-line-numbers-type 'relative)
   (global-hl-line-mode))
 
+(defun configure-starting-windows ()
+  (split-window-right)
+  (magit)
+  (split-window-below)
+  (other-window 1)
+  (dired ".")
+  (other-window 1)
+  (enlarge-window-horizontally 20))
+
+(defun configure-tramp-mode ()
+  ;; tramp mode ssh fix
+  (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
+  (setq tramp-shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"))
+
 (defun configure-weird-behaviors ()
   (setq vc-follow-symlinks t))
 
@@ -29,6 +43,7 @@
 
 (configure-line-mode)
 (configure-column-mode)
+(configure-tramp-mode)
 (configure-weird-behaviors)
 (install-packages
  ;; [DOCS](https://github.com/auto-complete/auto-complete)
@@ -46,10 +61,6 @@
 (ac-config-default)
 ;; terraform-mode
 (add-hook 'terraform-mode-hook #'outline-minor-mode)
-;; tramp mode ssh fix
-(eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
-(setq tramp-shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*")
-
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -73,3 +84,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(configure-starting-windows)
+
