@@ -10,5 +10,5 @@ if [[ $# -gt 0 ]]; then
     shift
 fi
 
-emacs /ssh:${EMACS_SSH_HOST}:${EMACS_SSH_PATH}
+emacs -fs /ssh:${EMACS_SSH_HOST}:${EMACS_SSH_PATH}
 
