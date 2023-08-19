@@ -18,7 +18,7 @@
   (magit)
   (split-window-below)
   (other-window 1)
-  (dired ".")
+  (term "/bin/zsh")
   (other-window 1)
   (enlarge-window-horizontally 20))
 
