@@ -8,6 +8,12 @@
 (defun configure-column-mode ()
   (setq column-number-mode t))
 
+(defun configure-hotkeys ()
+  (global-set-key (kbd "<C-M-up>")    'windmove-up)
+  (global-set-key (kbd "<C-M-down>")  'windmove-down)
+  (global-set-key (kbd "<C-M-left>")  'windmove-left)
+  (global-set-key (kbd "<C-M-right>") 'windmove-right))
+
 (defun configure-line-mode ()
   (global-display-line-numbers-mode)
   (setq display-line-numbers-type 'relative)
@@ -43,6 +49,7 @@
 
 (configure-line-mode)
 (configure-column-mode)
+(configure-hotkeys)
 (configure-tramp-mode)
 (configure-weird-behaviors)
 (install-packages
