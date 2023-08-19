@@ -31,6 +31,8 @@
 (configure-column-mode)
 (configure-weird-behaviors)
 (install-packages
+ ;; [DOCS](https://github.com/auto-complete/auto-complete)
+ 'auto-complete
  ;; [DOCS](https://github.com/clojure-emacs/cider)
  'cider
  ;; [DOCS](https://magit.vc/) 
@@ -40,11 +42,10 @@
  ;; [DOCS](https://github.com/hcl-emacs/terraform-mode)
  'terraform-mode
  )
+;; auto-complete
+(ac-config-default)
+;; terraform-mode
 (add-hook 'terraform-mode-hook #'outline-minor-mode)
-(custom-set-variables
- '(terraform-indent-level 2)
- '(terraform-format-on-save t))
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -56,7 +57,10 @@
    ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
  '(custom-enabled-themes '(manoj-dark))
  '(package-selected-packages
-   '(clojure-mode tabbar session pod-mode muttrc-mode mutt-alias markdown-mode initsplit htmlize graphviz-dot-mode folding eproject diminish csv-mode company color-theme-modern browse-kill-ring boxquote bm bar-cursor apache-mode magit)))
+   '(clojure-mode tabbar session pod-mode muttrc-mode mutt-alias markdown-mode initsplit htmlize graphviz-dot-mode folding eproject diminish csv-mode company color-theme-modern browse-kill-ring boxquote bm bar-cursor apache-mode magit))
+ '(terraform-format-on-save t)
+ '(terraform-indent-level 2))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
