@@ -31,11 +31,19 @@
 (configure-column-mode)
 (configure-weird-behaviors)
 (install-packages
+ ;; [DOCS](https://github.com/clojure-emacs/cider)
  'cider
+ ;; [DOCS](https://magit.vc/) 
  'magit
+ ;; [DOCS](https://github.com/emacsmirror/rainbow-mode)
  'rainbow-mode
+ ;; [DOCS](https://github.com/hcl-emacs/terraform-mode)
  'terraform-mode
  )
+(add-hook 'terraform-mode-hook #'outline-minor-mode)
+(custom-set-variables
+ '(terraform-indent-level 2)
+ '(terraform-format-on-save t))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
