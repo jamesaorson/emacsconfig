@@ -46,6 +46,11 @@
 (ac-config-default)
 ;; terraform-mode
 (add-hook 'terraform-mode-hook #'outline-minor-mode)
+;; tramp mode ssh fix
+(eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
+(setq tramp-shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*")
+
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -56,6 +61,7 @@
  '(ansi-color-names-vector
    ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
  '(custom-enabled-themes '(manoj-dark))
+ '(inhibit-startup-screen t)
  '(package-selected-packages
    '(clojure-mode tabbar session pod-mode muttrc-mode mutt-alias markdown-mode initsplit htmlize graphviz-dot-mode folding eproject diminish csv-mode company color-theme-modern browse-kill-ring boxquote bm bar-cursor apache-mode magit))
  '(terraform-format-on-save t)
