@@ -19,6 +19,13 @@
   (setq display-line-numbers-type 'relative)
   (global-hl-line-mode))
 
+(defun unconfigure-line-mode-local ()
+  "Disable line numbering in the current buffer."
+  (display-line-numbers-mode -1))
+
+(defun configure-pdf-mode ()
+  (add-hook 'pdf-view-mode-hook #'unconfigure-line-mode-local))
+
 (defun configure-starting-windows ()
   (split-window-right)
   (magit)
@@ -50,6 +57,7 @@
 (configure-line-mode)
 (configure-column-mode)
 (configure-hotkeys)
+(configure-pdf-mode)
 (configure-tex)
 (configure-tramp-mode)
 (configure-weird-behaviors)
