@@ -19,12 +19,13 @@
   (setq display-line-numbers-type 'relative)
   (global-hl-line-mode))
 
-(defun unconfigure-line-mode-local ()
-  "Disable line numbering in the current buffer."
+(defun -unconfigure-line-mode-local ()
+  "Source: https://www.reddit.com/r/emacs/comments/sy1n1f/globallinummode_1_causing_issues_with_pdf_viewing/ - Disable line numbering in the current buffer"
   (display-line-numbers-mode -1))
 
 (defun configure-pdf-mode ()
-  (add-hook 'pdf-view-mode-hook #'unconfigure-line-mode-local))
+  "Source: https://www.reddit.com/r/emacs/comments/sy1n1f/globallinummode_1_causing_issues_with_pdf_viewing/"
+  (add-hook 'pdf-view-mode-hook #'-unconfigure-line-mode-local))
 
 (defun configure-starting-windows ()
   (split-window-right)
@@ -36,7 +37,7 @@
   (setq latex-run-command "pdflatex"))
 
 (defun configure-tramp-mode ()
-  ;; tramp mode ssh fix
+  "Source: https://www.emacswiki.org/emacs/TrampMode#h5o-4 - Configures tramp mode and fixes the shell defaults"
   (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
   (setq tramp-shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"))
 
@@ -44,7 +45,7 @@
   (setq vc-follow-symlinks t))
 
 (defun install-packages (&rest packages)
-  "Assure every package is installed, ask for installation if it’s not. Return a list of installed packages or nil for every skipped package."
+  "Source: https://stackoverflow.com/a/10095853 - Assures every package is installed, ask for installation if it’s not, and returns a list of installed packages (or nil for every skipped package)"
   (mapcar
    (lambda (package)
      (if (package-installed-p package)
@@ -68,6 +69,7 @@
  'cider
  ;; [DOCS](https://magit.vc/) 
  'magit
+ ;; [DOCS](https://github.com/vedang/pdf-tools)
  'pdf-tools
  ;; [DOCS](https://github.com/emacsmirror/rainbow-mode)
  'rainbow-mode
@@ -104,5 +106,6 @@
  ;; If there is more than one, they won't work right.
  )
 
+;; After everything is ready...
 (configure-starting-windows)
 
