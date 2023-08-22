@@ -22,9 +22,6 @@
 (defun configure-starting-windows ()
   (split-window-right)
   (magit)
-  (split-window-below)
-  (other-window 1)
-  (term "/bin/zsh")
   (other-window 1)
   (enlarge-window-horizontally 20))
 
