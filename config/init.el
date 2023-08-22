@@ -60,6 +60,7 @@
  'cider
  ;; [DOCS](https://magit.vc/) 
  'magit
+ 'pdf-tools
  ;; [DOCS](https://github.com/emacsmirror/rainbow-mode)
  'rainbow-mode
  ;; [DOCS](https://github.com/hcl-emacs/terraform-mode)
@@ -67,6 +68,8 @@
  )
 ;; auto-complete
 (ac-config-default)
+;; pdf-tools
+(pdf-tools-install)
 ;; terraform-mode
 (add-hook 'terraform-mode-hook #'outline-minor-mode)
 
@@ -82,7 +85,7 @@
  '(custom-enabled-themes '(manoj-dark))
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   '(clojure-mode tabbar session pod-mode muttrc-mode mutt-alias markdown-mode initsplit htmlize graphviz-dot-mode folding eproject diminish csv-mode company color-theme-modern browse-kill-ring boxquote bm bar-cursor apache-mode magit))
+   '(## clojure-mode tabbar session pod-mode muttrc-mode mutt-alias markdown-mode initsplit htmlize graphviz-dot-mode folding eproject diminish csv-mode company color-theme-modern browse-kill-ring boxquote bm bar-cursor apache-mode magit))
  '(terraform-format-on-save t)
  '(terraform-indent-level 2))
 
