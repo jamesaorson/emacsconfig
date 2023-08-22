@@ -28,8 +28,6 @@
   (other-window 1)
   (enlarge-window-horizontally 20))
 
-(defun configure-tex ())
-
 (defun configure-tramp-mode ()
   ;; tramp mode ssh fix
   (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
@@ -52,7 +50,6 @@
 (configure-line-mode)
 (configure-column-mode)
 (configure-hotkeys)
-(configure-tex)
 (configure-tramp-mode)
 (configure-weird-behaviors)
 (install-packages
