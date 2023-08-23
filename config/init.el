@@ -62,6 +62,8 @@
 (configure-tex)
 (configure-tramp-mode)
 (configure-weird-behaviors)
+;; more weird behaviors
+(defalias 'yes-or-no-p 'y-or-n-p)
 (install-packages
  ;; [DOCS](https://github.com/auto-complete/auto-complete)
  'auto-complete
