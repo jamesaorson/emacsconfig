@@ -2,7 +2,7 @@
 
 set -euox pipefail
 
-EMACS_SSH_HOST=${EMACS_SSH_HOST:-ursinia}
+EMACS_SSH_HOST=${EMACS_SSH_HOST:-ursinia@ursinia.net}
 EMACS_SSH_PATH=${EMACS_SSH_PATH:-/code}
 
 if [[ $# -gt 0 ]]; then
@@ -10,5 +10,5 @@ if [[ $# -gt 0 ]]; then
     shift
 fi
 
-emacs -fs /ssh:${EMACS_SSH_HOST}:${EMACS_SSH_PATH}
+emacs -nw /ssh:${EMACS_SSH_HOST}:${EMACS_SSH_PATH}
 
