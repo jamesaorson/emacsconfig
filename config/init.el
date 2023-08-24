@@ -37,7 +37,8 @@
   (setq tramp-shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"))
 
 (defun configure-weird-behaviors ()
-  (setq vc-follow-symlinks t))
+  (setq vc-follow-symlinks t)
+  (xterm-mouse-mode t))
 
 (defun install-packages (&rest packages)
   "Source: https://stackoverflow.com/a/10095853 - Assures every package is installed, ask for installation if it’s not, and returns a list of installed packages (or nil for every skipped package)"
@@ -102,4 +103,3 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
