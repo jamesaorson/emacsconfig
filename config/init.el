@@ -38,7 +38,8 @@
 
 (defun configure-weird-behaviors ()
   (setq vc-follow-symlinks t)
-  (xterm-mouse-mode t))
+  (xterm-mouse-mode t)
+  (menu-bar-mode -1))
 
 (defun install-packages (&rest packages)
   "Source: https://stackoverflow.com/a/10095853 - Assures every package is installed, ask for installation if it’s not, and returns a list of installed packages (or nil for every skipped package)"
