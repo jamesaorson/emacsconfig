@@ -28,12 +28,6 @@
   "Source: https://www.reddit.com/r/emacs/comments/sy1n1f/globallinummode_1_causing_issues_with_pdf_viewing/"
   (add-hook 'pdf-view-mode-hook #'-unconfigure-line-mode-local))
 
-(defun configure-starting-windows ()
-  (split-window-right)
-  (magit)
-  (other-window 1)
-  (enlarge-window-horizontally 20))
-
 (defun configure-tex ()
   (setq latex-run-command "pdflatex"))
 
@@ -108,7 +102,4 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
-;; After everything is ready...
-(configure-starting-windows)
 
