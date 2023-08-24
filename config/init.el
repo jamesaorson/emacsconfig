@@ -68,6 +68,7 @@
  'cider
  ;; [DOCS](https://magit.vc/) 
  'magit
+ 'markdown-mode
  ;; [DOCS](https://github.com/vedang/pdf-tools)
  'pdf-tools
  ;; [DOCS](https://github.com/emacsmirror/rainbow-mode)
