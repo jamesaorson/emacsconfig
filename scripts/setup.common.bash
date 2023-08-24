@@ -16,7 +16,6 @@ for file in "init.el" "early-init.el"; do
     ln -s $(pwd)/config/${file} ${CONFIG_DIR}/${file}
 done
 
-echo 'export EDITOR=“$(which emacs) -nw”' >> ~/.zshrc
-echo 'alias emacs=“${EDITOR}”' >> ~/.zshrc
-echo 'alias vi=“${EDITOR}”' >> ~/.zshrc
+echo "alias emacs=\"emacs -nw\"" >> ~/.zshrc
+echo "alias vi=\"emacs -nw\"" >> ~/.zshrc
 

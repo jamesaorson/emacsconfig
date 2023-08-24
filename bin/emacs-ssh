@@ -3,7 +3,7 @@
 set -euox pipefail
 
 EMACS_SSH_HOST=${EMACS_SSH_HOST:-ursinia}
-EMACS_SSH_PATH=/code
+EMACS_SSH_PATH=${EMACS_SSH_PATH:-/code}
 
 if [[ $# -gt 0 ]]; then
     EMACS_SSH_PATH=$@
