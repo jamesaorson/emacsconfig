@@ -76,8 +76,6 @@
  ;; [DOCS](https://github.com/hcl-emacs/terraform-mode)
  'terraform-mode
  )
-;; auto-complete
-(ac-config-default)
 ;; pdf-tools
 (pdf-tools-install)
 ;; terraform-mode
