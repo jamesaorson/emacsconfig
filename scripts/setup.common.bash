@@ -16,6 +16,7 @@ for file in "init.el" "early-init.el"; do
     ln -s -f $(pwd)/config/${file} ${CONFIG_DIR}/${file}
 done
 
-echo "alias emacs=\"emacs -nw\"" >> ~/.zshrc
-echo "alias vi=\"emacs -nw\"" >> ~/.zshrc
+# NOTE: --user avoids an error: https://emacs.stackexchange.com/questions/34022/error-initialization-user-has-no-home-directory
+echo "alias emacs=\"emacs -nw --user=''\"" >> ~/.zshrc
+echo "alias vi=\"emacs -nw --user=''\"" >> ~/.zshrc
 
