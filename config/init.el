@@ -39,7 +39,8 @@
 (defun configure-weird-behaviors ()
   (setq vc-follow-symlinks t)
   (xterm-mouse-mode t)
-  (menu-bar-mode -1))
+  (menu-bar-mode -1)
+  (ac-config-default))
 
 (defun install-packages (&rest packages)
   "Source: https://stackoverflow.com/a/10095853 - Assures every package is installed, ask for installation if it’s not, and returns a list of installed packages (or nil for every skipped package)"
@@ -52,20 +53,14 @@
          package)))
    packages))
 
-(configure-line-mode)
-(configure-column-mode)
-(configure-hotkeys)
-(configure-pdf-mode)
-(configure-tex)
-(configure-tramp-mode)
-(configure-weird-behaviors)
-;; more weird behaviors
 (defalias 'yes-or-no-p 'y-or-n-p)
 (install-packages
  ;; [DOCS](https://github.com/auto-complete/auto-complete)
  'auto-complete
  ;; [DOCS](https://github.com/clojure-emacs/cider)
  'cider
+ ;; [DOCS](https://github.com/jacobono/emacs-gradle-mode/tree/master)
+ 'gradle-mode
  ;; [DOCS](https://magit.vc/) 
  'magit
  'markdown-mode
@@ -76,6 +71,14 @@
  ;; [DOCS](https://github.com/hcl-emacs/terraform-mode)
  'terraform-mode
  )
+
+(configure-line-mode)
+(configure-column-mode)
+(configure-hotkeys)
+(configure-pdf-mode)
+(configure-tex)
+(configure-tramp-mode)
+(configure-weird-behaviors)
 ;; pdf-tools
 (pdf-tools-install)
 ;; terraform-mode
