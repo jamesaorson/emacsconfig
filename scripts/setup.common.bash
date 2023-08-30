@@ -17,6 +17,6 @@ for file in "init.el" "early-init.el"; do
 done
 
 # NOTE: --user avoids an error: https://emacs.stackexchange.com/questions/34022/error-initialization-user-has-no-home-directory
-echo "alias emacs=\"emacs -nw --user=''\"" >> ~/.zshrc
-echo "alias vi=\"emacs -nw --user=''\"" >> ~/.zshrc
+# echo "alias emacs=\"emacs -nw --user=''\"" >> ~/.zshrc
+# echo "alias vi=\"emacs -nw --user=''\"" >> ~/.zshrc
 
