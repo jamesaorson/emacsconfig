@@ -8,6 +8,7 @@ brew install --cask \
      emacs     
 
 brew install \
-     basictex
+     mactex
 
 ./scripts/setup.common.bash
+
