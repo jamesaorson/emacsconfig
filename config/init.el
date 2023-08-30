@@ -15,10 +15,17 @@
   (global-set-key (kbd "<C-M-left>")  'windmove-left)
   (global-set-key (kbd "<C-M-right>") 'windmove-right))
 
+(defun configure-java ()
+  (require 'lsp-java)
+  (add-hook 'java-mode-hook #'lsp))
+
 (defun configure-line-mode ()
   (global-display-line-numbers-mode)
   (setq display-line-numbers-type 'relative)
   (global-hl-line-mode))
+
+(defun configure-lsp ()
+  ())
 
 (defun -unconfigure-line-mode-local ()
   "Source: https://www.reddit.com/r/emacs/comments/sy1n1f/globallinummode_1_causing_issues_with_pdf_viewing/ - Disable line numbering in the current buffer"
@@ -26,7 +33,11 @@
 
 (defun configure-pdf-mode ()
   "Source: https://www.reddit.com/r/emacs/comments/sy1n1f/globallinummode_1_causing_issues_with_pdf_viewing/"
-  (add-hook 'pdf-view-mode-hook #'-unconfigure-line-mode-local))
+  (add-hook 'pdf-view-mode-hook #'-unconfigure-line-mode-local)
+  (pdf-tools-install))
+
+(defun configure-terraform-mode ()
+  (add-hook 'terraform-mode-hook #'outline-minor-mode))
 
 (defun configure-tex ()
   (setq latex-run-command "pdflatex"))
@@ -40,7 +51,9 @@
   (setq vc-follow-symlinks t)
   (xterm-mouse-mode t)
   (menu-bar-mode -1)
-  (ac-config-default))
+  (ac-config-default)
+  (setq ls-lisp-use-insert-directory-program nil)
+  (require 'ls-lisp))
 
 (defun install-packages (&rest packages)
   "Source: https://stackoverflow.com/a/10095853 - Assures every package is installed, ask for installation if it’s not, and returns a list of installed packages (or nil for every skipped package)"
@@ -61,6 +74,8 @@
  'cider
  ;; [DOCS](https://github.com/jacobono/emacs-gradle-mode/tree/master)
  'gradle-mode
+ 'lsp-java
+ 'lsp-mode
  ;; [DOCS](https://magit.vc/) 
  'magit
  'markdown-mode
@@ -75,14 +90,13 @@
 (configure-line-mode)
 (configure-column-mode)
 (configure-hotkeys)
+(configure-java)
+(configure-lsp)
 (configure-pdf-mode)
+(configure-terraform-mode)
 (configure-tex)
 (configure-tramp-mode)
 (configure-weird-behaviors)
-;; pdf-tools
-(pdf-tools-install)
-;; terraform-mode
-(add-hook 'terraform-mode-hook #'outline-minor-mode)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
