@@ -12,9 +12,12 @@ mkdir -p ${CONFIG_DIR}
 
 ln -s -f $(pwd)/bin/emacs-ssh ${BIN_DIR}/emacs-ssh
 
-for file in "init.el" "early-init.el"; do
-    ln -s -f $(pwd)/emacs.d/${file} ${CONFIG_DIR}/${file}
+CWD=$(pwd)
+pushd ${CONFIG_DIR}
+for file in ${CWD}/emacs.d/*.el; do
+    ln -s -f ${file}
 done
+popd
 
 # NOTE: --user avoids an error: https://emacs.stackexchange.com/questions/34022/error-initialization-user-has-no-home-directory
 # echo "alias emacs=\"emacs -nw --user=''\"" >> ~/.zshrc

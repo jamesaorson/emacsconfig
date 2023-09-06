@@ -25,6 +25,7 @@
 (install-packages
  ;; [DOCS](https://github.com/auto-complete/auto-complete)
  'auto-complete
+ 'dtk
  ;; [DOCS](https://github.com/jacobono/emacs-gradle-mode/tree/master)
  'gradle-mode
  ;; [DOCS](https://github.com/hcl-emacs/terraform-mode)
@@ -123,7 +124,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (manoj-dark))))
+ '(custom-enabled-themes '(manoj-dark))
+ '(package-selected-packages
+   '(terraform-mode rainbow-mode pdf-tools magit lsp-java gradle-mode cider auto-complete)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
