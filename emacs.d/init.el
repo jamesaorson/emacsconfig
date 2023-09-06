@@ -82,6 +82,10 @@
   (add-hook 'pdf-view-mode-hook #'-unconfigure-line-mode-local)
   (pdf-tools-install))
 
+(defun configure-tab-mode ()
+  (global-tab-line-mode)
+  (tab-bar-mode 1))
+
 (defun configure-terraform-mode ()
   (add-hook 'terraform-mode-hook #'outline-minor-mode))
 
@@ -108,6 +112,7 @@
   (configure-pdf-mode))
 (configure-column-mode)
 (configure-hotkeys)
+(configure-tab-mode)
 (configure-terraform-mode)
 (configure-tex)
 (configure-tramp-mode)
