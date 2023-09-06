@@ -21,7 +21,8 @@
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-(setq emacs-version-major (string-to-number (car (split-string "." emacs-version))))
+(defvar emacs-version-major (string-to-number (car (split-string emacs-version "\\."))))
+
 (install-packages
  ;; [DOCS](https://github.com/auto-complete/auto-complete)
  'auto-complete
