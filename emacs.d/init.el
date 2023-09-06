@@ -53,6 +53,14 @@
 
 ;; Configuration
 
+(defun configure-antlr-mode ()
+  (defun -configure-antlr-mode ()
+    (when (and (stringp buffer-file-name)
+               (string-match "\\.g4\\'" buffer-file-name))
+      (antlr-mode)))
+
+  (add-hook 'find-file-hook '-configure-antlr-mode))
+
 (defun configure-column-mode ()
   (setq column-number-mode t))
 
@@ -111,6 +119,7 @@
   (configure-line-mode)
   (configure-lsp)
   (configure-pdf-mode))
+(configure-antlr-mode)
 (configure-column-mode)
 (configure-hotkeys)
 (configure-tab-mode)
