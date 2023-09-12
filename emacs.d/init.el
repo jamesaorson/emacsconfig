@@ -52,6 +52,37 @@
    'lsp-mode
    'rainbow-mode))
 
+;; Custom Modes
+
+(setq tiger-keywords (regexp-opt '(
+                                   "array"
+                                   "begin"
+                                   "break"
+                                   "do"
+                                   "else"
+                                   "end"
+                                   "enddo"
+                                   "endif"
+                                   "float"
+                                   "for"
+                                   "function"
+                                   "if"
+                                   "int"
+                                   "let"
+                                   "of"
+                                   "program"
+                                   "return"
+                                   "static"
+                                   "then"
+                                   "to"
+                                   "type"
+                                   "var"
+                                   "while")
+                                 t))
+;; TODO: Write an emacs mode for tiger - https://www.emacswiki.org/emacs/ModeTutorial
+(defun tiger-mode ()
+  ())
+
 ;; Configuration
 
 (defun configure-antlr-mode ()
@@ -70,6 +101,11 @@
   (global-set-key (kbd "<C-M-down>")  'windmove-down)
   (global-set-key (kbd "<C-M-left>")  'windmove-left)
   (global-set-key (kbd "<C-M-right>") 'windmove-right))
+
+(defun configure-indent ()
+  (setq-default indent-tabs-mode nil)
+  (setq-default tab-width 4)
+  (setq indent-line-function 'insert-tab))
 
 (defun configure-java ()
   (require 'lsp-java)
@@ -102,6 +138,14 @@
 (defun configure-tex ()
   (setq latex-run-command "pdflatex"))
 
+(defun configure-tiger-mode ()
+  (defun -configure-tiger-mode ()
+    (when (and (stringp buffer-file-name)
+               (string-match "\\.tiger\\'" buffer-file-name))
+      (tiger-mode)))
+
+  (add-hook 'find-file-hook '-configure-tiger-mode))
+
 (defun configure-tramp-mode ()
   "Source: https://www.emacswiki.org/emacs/TrampMode#h5o-4 - Configures tramp mode and fixes the shell defaults"
   (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
@@ -113,7 +157,9 @@
   (menu-bar-mode -1)
   (ac-config-default)
   (setq ls-lisp-use-insert-directory-program nil)
-  (require 'ls-lisp))
+  (require 'ls-lisp)
+  (c-set-offset 'case-label 4 nil)
+  (setq font-lock-maximum-decoration t))
 
 (when (>= emacs-version-major 29)
   (configure-java)
@@ -123,6 +169,7 @@
 (configure-antlr-mode)
 (configure-column-mode)
 (configure-hotkeys)
+(configure-indent)
 (configure-tab-mode)
 (configure-terraform-mode)
 (configure-tex)
@@ -136,10 +183,12 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(manoj-dark))
  '(package-selected-packages
-   '(terraform-mode rainbow-mode pdf-tools magit lsp-java gradle-mode cider auto-complete)))
+   '(ada-mode terraform-mode rainbow-mode pdf-tools magit lsp-java gradle-mode cider auto-complete)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(put 'upcase-region 'disabled nil)
+
