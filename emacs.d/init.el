@@ -34,6 +34,7 @@
  )
 (when (>= emacs-version-major 25)
   (install-packages
+   'graphviz-dot-mode
    ;; [DOCS](https://magit.vc/) 
    'magit))
 (when (>= emacs-version-major 26)
@@ -183,7 +184,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(manoj-dark))
  '(package-selected-packages
-   '(ada-mode terraform-mode rainbow-mode pdf-tools magit lsp-java gradle-mode cider auto-complete)))
+   '(yaml-mode ada-mode terraform-mode rainbow-mode pdf-tools magit lsp-java gradle-mode cider auto-complete)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
