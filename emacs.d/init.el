@@ -30,6 +30,7 @@
  'gradle-mode
  ;; [DOCS](https://github.com/hcl-emacs/terraform-mode)
  'terraform-mode
+ 'yaml-mode
  )
 (when (>= emacs-version-major 25)
   (install-packages
