@@ -32,9 +32,13 @@
  'terraform-mode
  'yaml-mode
  )
+(when (>= emacs-version-major 24)
+  (install-packages
+   'json-mode))
 (when (>= emacs-version-major 25)
   (install-packages
    'graphviz-dot-mode
+   'kubernetes
    ;; [DOCS](https://magit.vc/) 
    'magit))
 (when (>= emacs-version-major 26)
@@ -167,6 +171,7 @@
   (configure-line-mode)
   (configure-lsp)
   (configure-pdf-mode))
+
 (configure-antlr-mode)
 (configure-column-mode)
 (configure-hotkeys)
