@@ -15,7 +15,6 @@ sudo apt-get install -qy \
      librsvg2-dev \
      libtinfo-dev \
      libtiff-dev \
-     libtree-sitter-dev \
      libwebp-dev \
      libxaw7-dev \
      libxpm-dev \
