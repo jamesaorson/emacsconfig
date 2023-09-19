@@ -205,6 +205,7 @@
  ;; If there is more than one, they won't work right.
  )
 (put 'upcase-region 'disabled nil)
+(global-tree-sitter-mode)
 (treemacs)
 (other-window 1)
 
