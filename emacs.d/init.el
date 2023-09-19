@@ -104,10 +104,6 @@
 (defun configure-column-mode ()
   (setq column-number-mode t))
 
-(defun configure-dired ()
-  (require 'dired-quick-sort)
-  (dired-quick-sort-setup))
-
 (defun configure-hotkeys ()
   (global-set-key (kbd "<C-M-up>")    'windmove-up)
   (global-set-key (kbd "<C-M-down>")  'windmove-down)
@@ -181,7 +177,6 @@
 
 (configure-antlr-mode)
 (configure-column-mode)
-(configure-dired)
 (configure-hotkeys)
 (configure-indent)
 (configure-tab-mode)
