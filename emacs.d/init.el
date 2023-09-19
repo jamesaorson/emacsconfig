@@ -34,19 +34,23 @@
  )
 (when (>= emacs-version-major 24)
   (install-packages
+   'dired-quick-sort
    'json-mode))
 (when (>= emacs-version-major 25)
   (install-packages
    'graphviz-dot-mode
    'kubernetes
    ;; [DOCS](https://magit.vc/) 
-   'magit))
+   'magit
+   'tree-sitter
+   'tree-sitter-langs))
 (when (>= emacs-version-major 26)
   (install-packages
    ;; [DOCS](https://github.com/clojure-emacs/cider)
    'cider
    ;; [DOCS](https://github.com/vedang/pdf-tools)
-   'pdf-tools))
+   'pdf-tools)
+   'treemacs)
 (when (>= emacs-version-major 27)
   (install-packages
    'markdown-mode))
@@ -100,6 +104,10 @@
 
 (defun configure-column-mode ()
   (setq column-number-mode t))
+
+(defun configure-dired ()
+  (require 'dired-quick-sort)
+  (dired-quick-sort-setup))
 
 (defun configure-hotkeys ()
   (global-set-key (kbd "<C-M-up>")    'windmove-up)
@@ -174,6 +182,7 @@
 
 (configure-antlr-mode)
 (configure-column-mode)
+(configure-dired)
 (configure-hotkeys)
 (configure-indent)
 (configure-tab-mode)
@@ -188,8 +197,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(manoj-dark))
- '(package-selected-packages
-   '(yaml-mode ada-mode terraform-mode rainbow-mode pdf-tools magit lsp-java gradle-mode cider auto-complete)))
+ '(package-selected-packages nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -197,4 +205,6 @@
  ;; If there is more than one, they won't work right.
  )
 (put 'upcase-region 'disabled nil)
+(treemacs)
+(other-window 1)
 
