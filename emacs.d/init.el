@@ -162,7 +162,6 @@
 (defun configure-weird-behaviors ()
   (setq vc-follow-symlinks t)
   (xterm-mouse-mode t)
-  (menu-bar-mode -1)
   (ac-config-default)
   (setq ls-lisp-use-insert-directory-program nil)
   (require 'ls-lisp)
