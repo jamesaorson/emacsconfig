@@ -190,6 +190,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(manoj-dark))
+ '(inhibit-startup-screen t)
  '(package-selected-packages
    '(tree-sitter-langs yaml-mode terraform-mode rainbow-mode pdf-tools
                        magit lsp-java kubernetes json-mode
@@ -204,5 +205,8 @@
 (put 'upcase-region 'disabled nil)
 (global-tree-sitter-mode)
 (treemacs)
+(treemacs-select-directory)
+(other-window 1)
+(ansi-term (getenv "SHELL"))
 (other-window 1)
 
