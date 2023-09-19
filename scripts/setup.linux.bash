@@ -2,13 +2,27 @@
 
 set -euo pipefail
 
-cd $(dirname ${BASH_SOURCE[0]})/..
-
-brew install emacs
-brew services start emacs
 sudo apt-get install -qy \
+     build-essential \
      graphviz \
+     libgif-dev \
+     libgnutls28-dev \
+     libjpeg-dev \
+     libpng-dev \
+     librsvg2-dev \
+     libtinfo-dev \
+     libtiff-dev \
+     libwebp-dev \
+     libxaw7-dev \
+     libxpm-dev \
+     libz-dev \
      texlive-full
 
-./scripts/setup.common.bash
+cd $(dirname ${BASH_SOURCE[0]})
 
+cd ../src
+make
+sudo make install
+cd ..
+
+./scripts/setup.common.bash
