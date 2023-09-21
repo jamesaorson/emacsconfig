@@ -48,8 +48,11 @@
    ;; [DOCS](https://github.com/clojure-emacs/cider)
    'cider
    ;; [DOCS](https://github.com/vedang/pdf-tools)
-   'pdf-tools)
-   'treemacs)
+   'pdf-tools
+   'treemacs
+   'treemacs-all-the-icons
+   'treemacs-icons-dired
+   'treemacs-magit))
 (when (>= emacs-version-major 27)
   (install-packages
    'markdown-mode))
@@ -154,6 +157,15 @@
 
   (add-hook 'find-file-hook '-configure-tiger-mode))
 
+(defun configure-treemacs ()
+  (use-package treemacs-icons-dired
+    :hook (dired-mode . treemacs-icons-dired-enable-once)
+    :ensure nil)
+
+  (use-package treemacs-magit
+    :after (treemacs magit)
+    :ensure nil))
+
 (defun configure-tramp-mode ()
   "Source: https://www.emacswiki.org/emacs/TrampMode#h5o-4 - Configures tramp mode and fixes the shell defaults"
   (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
@@ -180,6 +192,7 @@
 (configure-indent)
 (configure-tab-mode)
 (configure-terraform-mode)
+(configure-treemacs)
 (configure-tex)
 (configure-tramp-mode)
 (configure-weird-behaviors)
@@ -191,11 +204,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(manoj-dark))
  '(inhibit-startup-screen t)
- '(package-selected-packages
-   '(tree-sitter-langs yaml-mode terraform-mode rainbow-mode pdf-tools
-                       magit lsp-java kubernetes json-mode
-                       graphviz-dot-mode gradle-mode go-eldoc
-                       go-autocomplete cider)))
+ '(package-selected-packages nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
