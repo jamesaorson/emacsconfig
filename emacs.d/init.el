@@ -14,9 +14,7 @@
    (lambda (package)
      (if (package-installed-p package)
          nil
-       (if (y-or-n-p (format "Package %s is missing. Install it? " package))
-           (package-install package)
-         package)))
+         (package-install package)))
    packages))
 
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -213,9 +211,4 @@
  )
 (put 'upcase-region 'disabled nil)
 (global-tree-sitter-mode)
-(treemacs)
-(treemacs-select-directory)
-(other-window 1)
-(ansi-term (getenv "SHELL"))
-(other-window 1)
 
