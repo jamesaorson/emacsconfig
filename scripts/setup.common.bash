@@ -14,7 +14,7 @@ ln -s -f $(pwd)/bin/emacs-ssh ${BIN_DIR}/emacs-ssh
 
 CWD=$(pwd)
 pushd ${CONFIG_DIR}
-for file in ${CWD}/emacs.d/*.el; do
+for file in ${CWD}/emacs.d/*.el ${CWD}/emacs.d/packages; do
     ln -s -f ${file}
 done
 popd

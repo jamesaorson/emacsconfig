@@ -2,6 +2,9 @@
 
 (require 'package)
 
+;;; Emacs Load Path
+(setq load-path (cons "~/.emacs.d/packages" load-path))
+
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
@@ -61,37 +64,6 @@
    'lsp-mode
    'rainbow-mode))
 
-;; Custom Modes
-
-(setq tiger-keywords (regexp-opt '(
-                                   "array"
-                                   "begin"
-                                   "break"
-                                   "do"
-                                   "else"
-                                   "end"
-                                   "enddo"
-                                   "endif"
-                                   "float"
-                                   "for"
-                                   "function"
-                                   "if"
-                                   "int"
-                                   "let"
-                                   "of"
-                                   "program"
-                                   "return"
-                                   "static"
-                                   "then"
-                                   "to"
-                                   "type"
-                                   "var"
-                                   "while")
-                                 t))
-;; TODO: Write an emacs mode for tiger - https://www.emacswiki.org/emacs/ModeTutorial
-(defun tiger-mode ()
-  ())
-
 ;; Configuration
 
 (defun configure-antlr-mode ()
@@ -125,12 +97,16 @@
   (setq display-line-numbers-type 'relative)
   (global-hl-line-mode))
 
-(defun configure-lsp ()
-  ())
-
 (defun -unconfigure-line-mode-local ()
   "Source: https://www.reddit.com/r/emacs/comments/sy1n1f/globallinummode_1_causing_issues_with_pdf_viewing/ - Disable line numbering in the current buffer"
   (display-line-numbers-mode -1))
+
+(defun configure-move-text ()
+  (load "move-text.el")
+  (move-text-default-bindings)
+
+  (global-set-key [27 down] 'move-text-down)
+  (global-set-key [27 up]   'move-text-up))
 
 (defun configure-pdf-mode ()
   "Source: https://www.reddit.com/r/emacs/comments/sy1n1f/globallinummode_1_causing_issues_with_pdf_viewing/"
@@ -146,14 +122,6 @@
 
 (defun configure-tex ()
   (setq latex-run-command "pdflatex"))
-
-(defun configure-tiger-mode ()
-  (defun -configure-tiger-mode ()
-    (when (and (stringp buffer-file-name)
-               (string-match "\\.tiger\\'" buffer-file-name))
-      (tiger-mode)))
-
-  (add-hook 'find-file-hook '-configure-tiger-mode))
 
 (defun configure-treemacs ()
   (use-package treemacs-icons-dired
@@ -172,7 +140,7 @@
 (defun configure-weird-behaviors ()
   (setq vc-follow-symlinks t)
   (xterm-mouse-mode t)
-  (ac-config-default)
+  ;;(ac-config-default)
   (setq ls-lisp-use-insert-directory-program nil)
   (require 'ls-lisp)
   (c-set-offset 'case-label 4 nil)
@@ -181,13 +149,13 @@
 (when (>= emacs-version-major 29)
   (configure-java)
   (configure-line-mode)
-  (configure-lsp)
   (configure-pdf-mode))
 
 (configure-antlr-mode)
 (configure-column-mode)
 (configure-hotkeys)
 (configure-indent)
+(configure-move-text)
 (configure-tab-mode)
 (configure-terraform-mode)
 (configure-treemacs)
@@ -202,7 +170,11 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(manoj-dark))
  '(inhibit-startup-screen t)
- '(package-selected-packages nil))
+ '(package-selected-packages
+   '(yaml-mode treemacs-magit treemacs-icons-dired treemacs-all-the-icons
+               tree-sitter-langs terraform-mode rainbow-mode pdf-tools
+               move-text lsp-java kubernetes json-mode
+               graphviz-dot-mode gradle-mode cider)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
