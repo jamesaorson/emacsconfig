@@ -18,13 +18,15 @@ cd ../src
   --with-xml2 \
   --without-dbus \
   --with-modules \
-  --without-ns \
   --without-imagemagick \
   --without-selinux \
-  --with-tree-sitter
+  --with-tree-sitter \
+  --with-ns \
+  --with-cocoa
 
 make -j8
 sudo make install
+ln -s -f $(pwd)/nextstep/Emacs.app /Applications/Emacs.app
 
 cd ..
 ./scripts/setup.common.bash
