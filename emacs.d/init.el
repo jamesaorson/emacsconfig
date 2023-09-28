@@ -1,5 +1,6 @@
 ;; Package Management
 (require 'package)
+(require 'eshell)
 
 ;;; Emacs Load Path
 (add-to-list 'load-path "~/.emacs.d/packages/")
@@ -39,7 +40,8 @@
  )
 (when (>= emacs-version-major 24)
   (install-packages
-   'json-mode))
+   'json-mode
+   'xterm-color))
 (when (>= emacs-version-major 25)
   (install-packages
    'graphviz-dot-mode
@@ -146,6 +148,44 @@
   (c-set-offset 'case-label 4 nil)
   (setq font-lock-maximum-decoration t))
 
+(defun configure-xterm ()
+  ;; BEGIN XTERM
+  ;; Comint
+  (setq comint-output-filter-functions
+        (remove 'ansi-color-process-output comint-output-filter-functions))
+
+  (add-hook 'shell-mode-hook
+            (lambda ()
+              ;; Disable font-locking in this buffer to improve performance
+              (font-lock-mode -1)
+              ;; Prevent font-locking from being re-enabled in this buffer
+              (make-local-variable 'font-lock-function)
+              (setq font-lock-function (lambda (_) nil))
+              (add-hook 'comint-preoutput-filter-functions 'xterm-color-filter nil t)))
+
+  ;; Eshell
+  (with-eval-after-load 'esh-mode
+    (add-hook 'eshell-mode-hook
+              (lambda () (progn
+                           (setq xterm-color-preserve-properties t)
+                           (setenv "TERM" "xterm-256color"))))
+
+    (add-to-list 'eshell-preoutput-filter-functions 'xterm-color-filter)
+
+    (setq eshell-output-filter-functions
+          (remove 'eshell-handle-ansi-color eshell-output-filter-functions)))
+
+  ;; Compilation
+  (setq compilation-environment '("TERM=xterm-256color"))
+
+  (defun my/advice-compilation-filter (f proc string)
+    (funcall f proc (xterm-color-filter string)))
+
+  (advice-add 'compilation-filter :around #'my/advice-compilation-filter)
+
+  ;; END XTERM
+  )
+
 (when (>= emacs-version-major 29)
   (configure-java)
   (configure-line-mode)
@@ -162,6 +202,9 @@
 (configure-tex)
 (configure-tramp-mode)
 (configure-weird-behaviors)
+(configure-xterm)
+
+(put 'upcase-region 'disabled nil)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -177,6 +220,4 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-(put 'upcase-region 'disabled nil)
-(global-tree-sitter-mode)
 
