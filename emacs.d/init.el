@@ -1,9 +1,8 @@
 ;; Package Management
-
 (require 'package)
 
 ;;; Emacs Load Path
-(setq load-path (cons "~/.emacs.d/packages" load-path))
+(add-to-list 'load-path "~/.emacs.d/packages/")
 
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
@@ -24,6 +23,10 @@
 
 (defvar emacs-version-major (string-to-number (car (split-string emacs-version "\\."))))
 
+;; Load manual packages
+(require 'move-text)
+
+;; Install community packages
 (install-packages
  ;; [DOCS](https://github.com/auto-complete/auto-complete)
  'auto-complete
@@ -103,11 +106,7 @@
   (display-line-numbers-mode -1))
 
 (defun configure-move-text ()
-  (load "move-text.el")
-  (move-text-default-bindings)
-
-  (global-set-key [27 down] 'move-text-down)
-  (global-set-key [27 up]   'move-text-up))
+  (move-text-default-bindings))
 
 (defun configure-pdf-mode ()
   "Source: https://www.reddit.com/r/emacs/comments/sy1n1f/globallinummode_1_causing_issues_with_pdf_viewing/"
@@ -171,11 +170,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(manoj-dark))
  '(inhibit-startup-screen t)
- '(package-selected-packages
-   '(yaml-mode treemacs-magit treemacs-icons-dired treemacs-all-the-icons
-               tree-sitter-langs terraform-mode rainbow-mode pdf-tools
-               move-text lsp-java kubernetes json-mode
-               graphviz-dot-mode gradle-mode cider)))
+ '(package-selected-packages nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

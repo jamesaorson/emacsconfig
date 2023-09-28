@@ -189,8 +189,10 @@ We use `prefix-numeric-value' to return a number.
 (defun move-text-default-bindings ()
   "Bind `move-text-up' and `move-text-down' to M-up & M-down."
   (interactive)
-  (global-set-key [M down] 'move-text-down)
-  (global-set-key [M up]   'move-text-up))
+  (global-set-key [27 up]   'move-text-up)
+  (global-set-key [27 down] 'move-text-down)
+  (global-set-key (kbd "<M-up>")  'move-text-up)
+  (global-set-key (kbd "<M-down>") 'move-text-down))
 
 (provide 'move-text)
 
