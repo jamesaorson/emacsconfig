@@ -27,6 +27,7 @@
 (install-packages
  ;; [DOCS](https://github.com/auto-complete/auto-complete)
  'auto-complete
+ 'cuda-mode
  ;; [DOCS](https://github.com/jacobono/emacs-gradle-mode/tree/master)
  'gradle-mode
  ;; [DOCS](https://github.com/hcl-emacs/terraform-mode)
