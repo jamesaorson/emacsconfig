@@ -159,9 +159,16 @@
   (add-hook 'java-mode-hook #'lsp))
 
 (defun configure-line-mode ()
-  (global-display-line-numbers-mode)
+  (global-display-line-numbers-mode 1)
   (setq display-line-numbers-type 'relative)
-  (global-hl-line-mode))
+  (global-hl-line-mode)
+  ;; but not everywhere
+  (dolist (mode '(org-mode-hook
+                  term-mode-hook
+                  shell-mode-hook
+                  treemacs-mode-hook
+                  eshell-mode-hook))
+    (add-hook mode (lambda () (display-line-numbers-mode 0)))))
 
 (defun -unconfigure-line-mode-local ()
   "Source: https://www.reddit.com/r/emacs/comments/sy1n1f/globallinummode_1_causing_issues_with_pdf_viewing/ - Disable line numbering in the current buffer"
