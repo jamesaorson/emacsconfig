@@ -215,6 +215,8 @@
   (c-set-offset 'case-label 4 nil)
   (setq font-lock-maximum-decoration t)
 
+  (delete-selection-mode 1)
+
   ;; SOURCE: https://github.com/flyingmachine/emacs-for-clojure
   (tooltip-mode -1)                 ;; disable tooltips
   (tool-bar-mode -1)
