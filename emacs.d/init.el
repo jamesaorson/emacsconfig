@@ -13,19 +13,6 @@
 (unless package-archive-contents
   (package-refresh-contents))
 
-;; setup.el provides a macro for configuration patterns
-;; it makes package installation and config nice and tidy!
-;; https://www.emacswiki.org/emacs/SetupEl
-(if (package-installed-p 'setup)
-    nil
-  (if (memq 'setup package-archive-contents)
-      nil
-    (package-refresh-contents))
-  (package-install 'setup))
-(require 'setup)
-
-(defvar chosen-font "FiraMono Nerd Font")
-
 (defun install-packages (&rest packages)
   "Source: https://stackoverflow.com/a/10095853 - Assures every package is installed, ask for installation if it’s not, and returns a list of installed packages (or nil for every skipped package)"
   (mapcar
@@ -83,17 +70,6 @@
    'lsp-java
    'lsp-mode
    'rainbow-mode))
-
-;; Setup manual installs
-
-;; projectile is another amazing package from the
-;; creator of CIDER. It's got lots of commands
-;; for searching and managing files in a project.
-;; https://projectile.mx/
-(setup (:package projectile)
-  (projectile-mode +1)
-  (:bind "s-p" projectile-command-map
-         "C-c p" projectile-command-map))
 
 ;; Key binding to use "hippie expand" for text autocompletion
 ;; http://www.emacswiki.org/emacs/HippieExpand
@@ -223,8 +199,8 @@
 
 (defun configure-other ()
   (setq vc-follow-symlinks t)
-  (xterm-mouse-mode t)
-  ;;(ac-config-default)
+  (xterm-mouse-mode nil)
+  (ac-config-default)
   (setq ls-lisp-use-insert-directory-program nil)
   (require 'ls-lisp)
   (c-set-offset 'case-label 4 nil)
@@ -279,7 +255,7 @@
   ;; Your choice of font is very personal, and you must have installed it
   ;; on your system before you specify it here,
   ;; Some font suggestions:  https://www.creativebloq.com/features/the-best-monospace-fonts-for-coding
-  (set-face-attribute 'default nil :font chosen-font)
+  (set-face-attribute 'default nil :font "FiraMono Nerd Font")
 
   ;; Sets up exec-path-from shell
   ;; https://github.com/purcell/exec-path-from-shell
