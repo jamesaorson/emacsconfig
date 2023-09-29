@@ -4,6 +4,8 @@
 
 (fset 'yes-or-no-p 'y-or-n-p)     ;; changes all yes/no questions to y/n type
 
+(set-face-attribute 'default nil :font "FiraMono Nerd Font")
+
 ;;; Emacs Load Path
 (add-to-list 'load-path "~/.emacs.d/packages/")
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
@@ -205,6 +207,7 @@
   (require 'ls-lisp)
   (c-set-offset 'case-label 4 nil)
   (setq font-lock-maximum-decoration t)
+
   ;; SOURCE: https://github.com/flyingmachine/emacs-for-clojure
   (tooltip-mode -1)                 ;; disable tooltips
   (tool-bar-mode -1)
@@ -250,12 +253,6 @@
 
    ;; Mouse yank commands yank at point instead of at click.
    mouse-yank-at-point t)
-  ;; CUSTOMIZE
-
-  ;; Your choice of font is very personal, and you must have installed it
-  ;; on your system before you specify it here,
-  ;; Some font suggestions:  https://www.creativebloq.com/features/the-best-monospace-fonts-for-coding
-  (set-face-attribute 'default nil :font "FiraMono Nerd Font")
 
   ;; Sets up exec-path-from shell
   ;; https://github.com/purcell/exec-path-from-shell
