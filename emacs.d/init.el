@@ -48,6 +48,7 @@
 (when (>= emacs-version-major 25)
   (install-packages
    'graphviz-dot-mode
+   'hl-todo
    'kubernetes
    ;; [DOCS](https://magit.vc/) 
    'magit
@@ -193,6 +194,18 @@
   (setq latex-run-command "pdflatex"))
 
 (defun configure-treemacs ()
+  (when treemacs-python-executable
+    (treemacs-git-commit-diff-mode t))
+
+  (pcase (cons (not (null (executable-find "git")))
+               (not (null treemacs-python-executable)))
+    (`(t . t)
+     (treemacs-git-mode 'deferred))
+    (`(t . _)
+     (treemacs-git-mode 'simple)))
+
+  (treemacs-hide-gitignored-files-mode nil)
+
   (use-package treemacs-icons-dired
     :hook (dired-mode . treemacs-icons-dired-enable-once)
     :ensure nil)
@@ -207,6 +220,7 @@
   (setq tramp-shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"))
 
 (defun configure-other ()
+  (global-hl-todo-mode t)
   (setq vc-follow-symlinks t)
   (xterm-mouse-mode nil)
   (ac-config-default)
@@ -343,4 +357,6 @@
 
 ;; Make gc pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
+
+(treemacs)
 
