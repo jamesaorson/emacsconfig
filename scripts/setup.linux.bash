@@ -10,11 +10,13 @@ sudo apt-get install -qy \
      libgif-dev \
      libgnutls28-dev \
      libharfbuzz-dev \
+     libjansson-dev \
      libjpeg-dev \
      libpng-dev \
      librsvg2-dev \
      libtinfo-dev \
      libtiff-dev \
+     libtree-sitter-dev \
      libwebp-dev \
      libxaw7-dev \
      libxpm-dev \
@@ -26,8 +28,16 @@ cd $(dirname ${BASH_SOURCE[0]})
 cd ../src
 ./autogen.sh
 ./configure \
-    --with-native-compilation \
-    CC=gcc-10
+  --disable-silent-rules \
+  --with-gnutls \
+  --with-json \
+  --with-modules \
+  --with-tree-sitter \
+  --with-xml2 \
+  --without-dbus \
+  --without-imagemagick \
+  --with-native-compilation \
+  CC=gcc-10
 
 make -j8
 sudo make install

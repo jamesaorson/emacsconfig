@@ -13,16 +13,17 @@ cd ../src
 ./autogen.sh
 ./configure \
   --disable-silent-rules \
+  --with-cocoa \
   --with-gnutls \
-  --without-x \
+  --with-json \
+  --with-modules \
+  --with-ns \
+  --with-tree-sitter \
   --with-xml2 \
   --without-dbus \
-  --with-modules \
   --without-imagemagick \
   --without-selinux \
-  --with-tree-sitter \
-  --with-ns \
-  --with-cocoa
+  --without-x
 
 make -j8
 sudo make install
