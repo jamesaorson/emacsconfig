@@ -15,7 +15,6 @@ cd ../src
   --disable-silent-rules \
   --with-cocoa \
   --with-gnutls \
-  --with-json \
   --with-modules \
   --with-ns \
   --with-tree-sitter \
