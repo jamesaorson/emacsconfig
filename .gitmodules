@@ -1,4 +1,5 @@
 [submodule "src"]
 	path = src
 	url = git://git.sv.gnu.org/emacs.git
+	shallow = true
 
