@@ -6,37 +6,71 @@ sudo apt-get install -qy \
      build-essential \
      gcc-10 \
      graphviz \
+     libacl1-dev \
+     libc6-dev \
+     libdbus-1-dev \
      libgccjit-10-dev \
+     libgconf2-dev \
      libgif-dev \
      libgnutls28-dev \
+     libgpm-dev \
+     libgtk-3-dev \
+     libharfbuzz-bin \
      libharfbuzz-dev \
+     libice-dev \
      libjansson-dev \
      libjpeg-dev \
+     libm17n-dev \
+     libmagickcore-dev \
+     libmagickwand-dev \
+     libncurses5-dev \
+     libotf-dev \
      libpng-dev \
      librsvg2-dev \
-     libtinfo-dev \
+     libsm-dev \
+     libsystemd-dev \
      libtiff-dev \
+     libtinfo-dev \
      libtree-sitter-dev \
+     libwebkit2gtk-4.0-dev \
      libwebp-dev \
+     libx11-dev \
+     libxaw3dxft8-dev \
      libxaw7-dev \
+     libxext-dev \
+     libxft-dev \
+     libxft2 \
+     libxi-dev \
+     libxmu-dev \
+     libxmuu-dev \
      libxpm-dev \
+     libxrandr-dev \
+     libxt-dev \
+     libxtst-dev \
+     libxv-dev \
      libz-dev \
-     texlive-full
+     texlive-full \
+     xaw3dg-dev \
+     zlib1g-dev
 
 cd $(dirname ${BASH_SOURCE[0]})
 
 cd ../src
 ./autogen.sh
 ./configure \
-  --disable-silent-rules \
+  --with-cairo \
+  --with-gconf \
   --with-gnutls \
+  --with-imagemagick \
   --with-json \
   --with-modules \
-  --with-tree-sitter \
-  --with-xml2 \
-  --without-dbus \
-  --without-imagemagick \
   --with-native-compilation \
+  --with-tree-sitter \
+  --with-x \
+  --with-xft \
+  --with-xml2 \
+  --with-xwidgets \
+  --with-x-toolkit=gtk3 \
   CC=gcc-10
 
 make -j8
