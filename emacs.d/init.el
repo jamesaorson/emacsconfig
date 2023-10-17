@@ -2,6 +2,8 @@
 (require 'package)
 (require 'eshell)
 
+(setq read-process-output-max (* 1024 1024)) ;; 1mb
+
 (fset 'yes-or-no-p 'y-or-n-p)     ;; changes all yes/no questions to y/n type
 
 ;; (set-face-attribute 'default nil :font "FiraMono Nerd Font")
