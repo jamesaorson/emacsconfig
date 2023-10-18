@@ -52,6 +52,11 @@ sudo apt-get install -qy \
      xaw3dg-dev \
      zlib1g-dev
 
+TREE_SITTER=libtree-sitter-dev
+if [[ $(apt-cache search ${TREE_SITTER}) != "" ]]; then
+	sudo apt-get install -qy ${TREE_SITTER}
+fi
+
 cd $(dirname ${BASH_SOURCE[0]})
 
 cd ../src
@@ -64,7 +69,7 @@ cd ../src
   --with-json \
   --with-modules \
   --with-native-compilation \
-  --with-tree-sitter \
+  --with-tree-sitter=ifavailable \
   --with-x \
   --with-xft \
   --with-xml2 \
