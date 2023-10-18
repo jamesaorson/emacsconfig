@@ -31,7 +31,6 @@ sudo apt-get install -qy \
      libsystemd-dev \
      libtiff-dev \
      libtinfo-dev \
-     libtree-sitter-dev \
      libwebkit2gtk-4.0-dev \
      libwebp-dev \
      libx11-dev \
