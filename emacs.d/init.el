@@ -337,6 +337,7 @@
 (configure-hotkeys)
 (configure-indent)
 (configure-move-text)
+(configure-slime)
 (configure-tab-mode)
 (configure-terraform-mode)
 (configure-treemacs)
