@@ -39,6 +39,7 @@
  ;; [DOCS](https://github.com/jacobono/emacs-gradle-mode/tree/master)
  'gradle-mode
  'setup
+ 'slime
  ;; [DOCS](https://github.com/hcl-emacs/terraform-mode)
  'terraform-mode
  'yaml-mode
@@ -184,6 +185,9 @@
   "Source: https://www.reddit.com/r/emacs/comments/sy1n1f/globallinummode_1_causing_issues_with_pdf_viewing/"
   (add-hook 'pdf-view-mode-hook #'-unconfigure-line-mode-local)
   (pdf-tools-install))
+
+(defun configure-slime ()
+  (setq inferior-lisp-program "sbcl"))
 
 (defun configure-tab-mode ()
   (global-tab-line-mode)
