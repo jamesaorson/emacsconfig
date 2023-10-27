@@ -361,6 +361,8 @@
  ;; If there is more than one, they won't work right.
  )
 
+(set-background-color "#333333")
+
 ;; Make gc pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
 
