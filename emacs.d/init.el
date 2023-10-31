@@ -47,6 +47,8 @@
 (when (>= emacs-version-major 24)
   (install-packages
    'json-mode
+   'amx
+   'ido-completing-read+
    'xterm-color))
 (when (>= emacs-version-major 25)
   (install-packages
@@ -152,6 +154,14 @@
   (global-set-key (kbd "<C-M-down>")  'windmove-down)
   (global-set-key (kbd "<C-M-left>")  'windmove-left)
   (global-set-key (kbd "<C-M-right>") 'windmove-right))
+
+(defun configure-ido ()
+  (ido-mode 1)
+  (ido-everywhere 1)
+
+  (ido-ubiquitous-mode 1)
+
+  (amx-mode 1))
 
 (defun configure-indent ()
   (setq-default indent-tabs-mode nil)
@@ -280,8 +290,6 @@
    ;; Mouse yank commands yank at point instead of at click.
    mouse-yank-at-point t)
 
-  (ido-mode t)
-
   ;; Sets up exec-path-from shell
   ;; https://github.com/purcell/exec-path-from-shell
   (setup 
@@ -335,6 +343,7 @@
 (configure-antlr-mode)
 (configure-column-mode)
 (configure-hotkeys)
+(configure-ido)
 (configure-indent)
 (configure-move-text)
 (configure-slime)
