@@ -115,6 +115,7 @@ cd ../src
   ${CONFIGURE_ARGS}
 make -j16
 make install
+cd ..
 
-./post.sh
+./scripts/post.bash
 
