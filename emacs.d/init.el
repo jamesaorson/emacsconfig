@@ -37,6 +37,7 @@
  ;; [DOCS](https://github.com/auto-complete/auto-complete)
  'auto-complete
  'cuda-mode
+ 'dumb-jump
  ;; [DOCS](https://github.com/jacobono/emacs-gradle-mode/tree/master)
  'gradle-mode
  'setup
@@ -368,7 +369,14 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(modus-vivendi))
  '(inhibit-startup-screen t)
- '(package-selected-packages nil))
+ '(package-selected-packages
+   '(auto-complete yaml-mode xterm-color treemacs-magit
+                   treemacs-icons-dired treemacs-all-the-icons
+                   tree-sitter-langs terraform-mode slime setup
+                   rainbow-mode pdf-tools lsp-java kubernetes
+                   json-mode ido-grid-mode ido-completing-read+
+                   hl-todo graphviz-dot-mode gradle-mode dumb-jump
+                   cuda-mode cider amx)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

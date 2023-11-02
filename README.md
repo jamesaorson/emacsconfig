@@ -10,16 +10,8 @@ Configuration for a GNU Emacs setup
 
 ## Setup
 
-Run the setup script for your relevant platform
-
-### Setup - Linux
+Run the setup script
 
 ```shell
-./scripts/setup.linux.bash
-```
-
-### Setup - OSX
-
-```shell
-./scripts/setup.osx.bash
+./scripts/setup.bash
 ```
