@@ -2,7 +2,7 @@
 
 set -euox pipefail
 
-cd $(dirname ${BASH_SOURCE[0]})/..
+cd $(dirname ${BASH_SOURCE[0]})
 
 if sudo -v; then
   PLATFORM="$(uname -s)"
@@ -106,8 +106,6 @@ EOF
   esac
 fi
 
-cd $(dirname ${BASH_SOURCE[0]})
-
 LOCAL_DIR=${HOME}/.local
 
 cd ../src
@@ -118,22 +116,5 @@ cd ../src
 make -j16
 make install
 
-BIN_DIR=${HOME}/.local/bin
-CONFIG_DIR=~/.emacs.d
-
-mkdir -p ${BIN_DIR}
-mkdir -p ${CONFIG_DIR}
-
-ln -s -f $(pwd)/bin/emacs-ssh ${BIN_DIR}/emacs-ssh
-
-CWD=$(pwd)
-pushd ${CONFIG_DIR}
-for file in ${CWD}/emacs.d/*.el ${CWD}/emacs.d/packages; do
-    ln -s -f ${file}
-done
-popd
-
-# NOTE: --user avoids an error: https://emacs.stackexchange.com/questions/34022/error-initialization-user-has-no-home-directory
-# echo "alias emacs=\"emacs -nw --user=''\"" >> ~/.zshrc
-# echo "alias vi=\"emacs -nw --user=''\"" >> ~/.zshrc
+./post.sh
 

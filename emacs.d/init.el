@@ -34,8 +34,6 @@
 
 ;; Install community packages
 (install-packages
- ;; [DOCS](https://github.com/auto-complete/auto-complete)
- 'auto-complete
  'cuda-mode
  'dumb-jump
  ;; [DOCS](https://github.com/jacobono/emacs-gradle-mode/tree/master)
@@ -55,6 +53,7 @@
    'xterm-color))
 (when (>= emacs-version-major 25)
   (install-packages
+   'company-mode
    'graphviz-dot-mode
    'hl-todo
    'kubernetes
@@ -152,6 +151,9 @@
 (defun configure-column-mode ()
   (setq column-number-mode t))
 
+(defun configure-company ()
+  (global-company-mode t))
+
 (defun configure-current-window-only ()
   (current-window-only-mode t))
 
@@ -246,7 +248,6 @@
   (global-hl-todo-mode t)
   (setq vc-follow-symlinks t)
   (xterm-mouse-mode nil)
-  (ac-config-default)
   (setq ls-lisp-use-insert-directory-program nil)
   (require 'ls-lisp)
   (c-set-offset 'case-label 4 nil)

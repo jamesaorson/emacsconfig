@@ -15,3 +15,12 @@ Run the setup script
 ```shell
 ./scripts/setup.bash
 ```
+
+### Refreshing emacs directory
+
+If you want to skip compile and just refresh the emacs directory, simply run the `post.bash` on its own
+
+```shell
+./scripts/post.bash
+```
+
