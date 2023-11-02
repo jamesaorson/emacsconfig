@@ -30,6 +30,7 @@
 
 ;; Load manual packages
 (require 'move-text)
+(require 'current-window-only)
 
 ;; Install community packages
 (install-packages
@@ -149,6 +150,9 @@
 
 (defun configure-column-mode ()
   (setq column-number-mode t))
+
+(defun configure-current-window-only ()
+  (current-window-only-mode t))
 
 (defun configure-hotkeys ()
   (global-set-key (kbd "<C-M-up>")    'windmove-up)
