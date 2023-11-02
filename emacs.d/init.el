@@ -53,7 +53,7 @@
    'xterm-color))
 (when (>= emacs-version-major 25)
   (install-packages
-   'company-mode
+   'company
    'graphviz-dot-mode
    'hl-todo
    'kubernetes
@@ -152,7 +152,7 @@
   (setq column-number-mode t))
 
 (defun configure-company ()
-  (global-company-mode t))
+  (add-hook 'after-init-hook 'global-company-mode))
 
 (defun configure-current-window-only ()
   (current-window-only-mode t))
@@ -350,6 +350,7 @@
 
 (configure-antlr-mode)
 (configure-column-mode)
+(configure-company)
 (configure-hotkeys)
 (configure-ido)
 (configure-indent)
@@ -370,14 +371,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(modus-vivendi))
  '(inhibit-startup-screen t)
- '(package-selected-packages
-   '(auto-complete yaml-mode xterm-color treemacs-magit
-                   treemacs-icons-dired treemacs-all-the-icons
-                   tree-sitter-langs terraform-mode slime setup
-                   rainbow-mode pdf-tools lsp-java kubernetes
-                   json-mode ido-grid-mode ido-completing-read+
-                   hl-todo graphviz-dot-mode gradle-mode dumb-jump
-                   cuda-mode cider amx)))
+ '(package-selected-packages nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -389,4 +383,3 @@
 
 ;; Make gc pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
-
