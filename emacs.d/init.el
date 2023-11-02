@@ -49,6 +49,7 @@
    'json-mode
    'amx
    'ido-completing-read+
+   'ido-grid-mode
    'xterm-color))
 (when (>= emacs-version-major 25)
   (install-packages
@@ -157,6 +158,7 @@
 
 (defun configure-ido ()
   (ido-mode 1)
+  (ido-grid-mode 1)
   (ido-everywhere 1)
 
   (ido-ubiquitous-mode 1)
