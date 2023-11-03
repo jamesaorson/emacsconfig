@@ -10,9 +10,10 @@ CONFIG_DIR=~/.emacs.d
 mkdir -p ${BIN_DIR}
 mkdir -p ${CONFIG_DIR}
 
-ln -s -f $(pwd)/bin/emacs-ssh ${BIN_DIR}/emacs-ssh
-
+cd ..
 CWD=$(pwd)
+ln -s -f ${CWD}/bin/emacs-ssh ${BIN_DIR}/emacs-ssh
+
 pushd ${CONFIG_DIR}
 for file in ${CWD}/emacs.d/early-init.el ${CWD}/emacs.d/init.el ${CWD}/emacs.d/packages; do
     ln -s -f ${file}

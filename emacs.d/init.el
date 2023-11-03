@@ -6,7 +6,7 @@
 
 (fset 'yes-or-no-p 'y-or-n-p)     ;; changes all yes/no questions to y/n type
 
-;; (set-face-attribute 'default nil :font "FiraMono Nerd Font")
+(set-face-attribute 'default nil :font "FiraMono Nerd Font Mono")
 
 ;;; Emacs Load Path
 (add-to-list 'load-path "~/.emacs.d/packages/")
@@ -35,6 +35,7 @@
 ;; Install community packages
 (install-packages
  'cuda-mode
+ 'doom-themes
  'dumb-jump
  ;; [DOCS](https://github.com/jacobono/emacs-gradle-mode/tree/master)
  'gradle-mode
@@ -46,10 +47,11 @@
  )
 (when (>= emacs-version-major 24)
   (install-packages
-   'json-mode
+   'all-the-icons
    'amx
    'ido-completing-read+
    'ido-grid-mode
+   'json-mode
    'xterm-color))
 (when (>= emacs-version-major 25)
   (install-packages
@@ -68,7 +70,6 @@
    ;; [DOCS](https://github.com/vedang/pdf-tools)
    'pdf-tools
    'treemacs
-   'treemacs-all-the-icons
    'treemacs-icons-dired
    'treemacs-magit))
 (when (>= emacs-version-major 27)
@@ -216,7 +217,24 @@
   (add-hook 'terraform-mode-hook #'outline-minor-mode))
 
 (defun configure-tex ()
-  (setq latex-run-command "pdflatex"))
+  (setq latex-run-command "pdflatex")
+  (setq tex-start-options "-shell-escape "))
+
+(defun configure-theme ()
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  (load-theme 'doom-one t)
+
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
+  ;; Enable custom neotree theme (all-the-icons must be installed!)
+  ;;(doom-themes-neotree-config)
+  ;; or for treemacs users
+  (setq doom-themes-treemacs-theme "doom-one") ; use "doom-colors" for less minimal icon theme
+  (doom-themes-treemacs-config)
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
 
 (defun configure-treemacs ()
   (when treemacs-python-executable
@@ -364,22 +382,72 @@
 (configure-other)
 (configure-xterm)
 
+(configure-theme)
+
+;; Make gc pauses faster by decreasing the threshold.
+(setq gc-cons-threshold (* 2 1000 1000))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes '(modus-vivendi))
- '(inhibit-startup-screen t)
- '(package-selected-packages nil))
+ '(custom-safe-themes
+   '("3de5c795291a145452aeb961b1151e63ef1cb9565e3cdbd10521582b5fd02e9a"
+     "7e377879cbd60c66b88e51fad480b3ab18d60847f31c435f15f5df18bdb18184"
+     "4b6cc3b60871e2f4f9a026a5c86df27905fb1b0e96277ff18a76a39ca53b82e1"
+     "9dccdccfeb236623d5c7cf0250a92308cf307afde4ebdaf173b59e8bbbae1828"
+     "88f7ee5594021c60a4a6a1c275614103de8c1435d6d08cc58882f920e0cec65e"
+     "5b9a45080feaedc7820894ebbfe4f8251e13b66654ac4394cb416fef9fdca789"
+     "3cdd0a96236a9db4e903c01cb45c0c111eb1492313a65790adb894f9f1a33b2d"
+     "75b2a02e1e0313742f548d43003fcdc45106553af7283fb5fad74359e07fe0e2"
+     "8d3ef5ff6273f2a552152c7febc40eabca26bae05bd12bc85062e2dc224cde9a"
+     "be84a2e5c70f991051d4aaf0f049fa11c172e5d784727e0b525565bb1533ec78"
+     "b9761a2e568bee658e0ff723dd620d844172943eb5ec4053e2b199c59e0bcc22"
+     "9d29a302302cce971d988eb51bd17c1d2be6cd68305710446f658958c0640f68"
+     "2721b06afaf1769ef63f942bf3e977f208f517b187f2526f0e57c1bd4a000350"
+     "da75eceab6bea9298e04ce5b4b07349f8c02da305734f7c0c8c6af7b5eaa9738"
+     "ff24d14f5f7d355f47d53fd016565ed128bf3af30eb7ce8cae307ee4fe7f3fd0"
+     "df6dfd55673f40364b1970440f0b0cb8ba7149282cf415b81aaad2d98b0f0290"
+     "f4d1b183465f2d29b7a2e9dbe87ccc20598e79738e5d29fc52ec8fb8c576fcfd"
+     "dc8285f7f4d86c0aebf1ea4b448842a6868553eded6f71d1de52f3dcbc960039"
+     "38c0c668d8ac3841cb9608522ca116067177c92feeabc6f002a27249976d7434"
+     "e3daa8f18440301f3e54f2093fe15f4fe951986a8628e98dcd781efbec7a46f2"
+     "c1d5759fcb18b20fd95357dcd63ff90780283b14023422765d531330a3d3cec2"
+     "70e7f094987e3c6226c54078dd986e11cab7246ea1c9e58a9907afa90f3c10c9"
+     "dfb1c8b5bfa040b042b4ef660d0aab48ef2e89ee719a1f24a4629a0c5ed769e8"
+     "02d422e5b99f54bd4516d4157060b874d14552fe613ea7047c4a5cfa1288cf4f"
+     "e14884c30d875c64f6a9cdd68fe87ef94385550cab4890182197b95d53a7cf40"
+     "8c7e832be864674c220f9a9361c851917a93f921fedb7717b1b5ece47690c098"
+     "aec7b55f2a13307a55517fdf08438863d694550565dee23181d2ebd973ebd6b8"
+     "badd1a5e20bd0c29f4fe863f3b480992c65ef1fa63951f59aa5d6b129a3f9c4c"
+     "13096a9a6e75c7330c1bc500f30a8f4407bd618431c94aeab55c9855731a95e1"
+     "6f96a9ece5fdd0d3e04daea6aa63e13be26b48717820aa7b5889c602764cf23a"
+     "8b148cf8154d34917dfc794b5d0fe65f21e9155977a36a5985f89c09a9669aa0"
+     "bf948e3f55a8cd1f420373410911d0a50be5a04a8886cabe8d8e471ad8fdba8e"
+     "680f62b751481cc5b5b44aeab824e5683cf13792c006aeba1c25ce2d89826426"
+     "a44e2d1636a0114c5e407a748841f6723ed442dc3a0ed086542dc71b92a87aee"
+     "631c52620e2953e744f2b56d102eae503017047fb43d65ce028e88ef5846ea3b"
+     "b54376ec363568656d54578d28b95382854f62b74c32077821fdfd604268616a"
+     "3fe1ebb870cc8a28e69763dde7b08c0f6b7e71cc310ffc3394622e5df6e4f0da"
+     "f5f80dd6588e59cfc3ce2f11568ff8296717a938edd448a947f9823a4e282b66"
+     "a9abd706a4183711ffcca0d6da3808ec0f59be0e8336868669dc3b10381afb6f"
+     "8d8207a39e18e2cc95ebddf62f841442d36fcba01a2a9451773d4ed30b632443"
+     "37b6695bae243145fa2dfb41440c204cd22833c25cd1993b0f258905b9e65577"
+     "443e2c3c4dd44510f0ea8247b438e834188dc1c6fb80785d83ad3628eadf9294"
+     "dccf4a8f1aaf5f24d2ab63af1aa75fd9d535c83377f8e26380162e888be0c6a9"
+     "c517e98fa036a0c21af481aadd2bdd6f44495be3d4ac2ce9d69201fcb2578533"
+     "014cb63097fc7dbda3edf53eb09802237961cbb4c9e9abd705f23b86511b0a69"
+     default))
+ '(package-selected-packages
+   '(yaml-mode xterm-color treemacs-magit treemacs-icons-dired
+               tree-sitter-langs terraform-mode slime setup
+               rainbow-mode pdf-tools lsp-java kubernetes json-mode
+               ido-grid-mode ido-completing-read+ hl-todo
+               graphviz-dot-mode gradle-mode dumb-jump doom-themes
+               cuda-mode company cider amx)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
-(set-background-color "#333333")
-
-;; Make gc pauses faster by decreasing the threshold.
-(setq gc-cons-threshold (* 2 1000 1000))
