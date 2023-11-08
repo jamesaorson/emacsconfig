@@ -438,13 +438,7 @@
      "c517e98fa036a0c21af481aadd2bdd6f44495be3d4ac2ce9d69201fcb2578533"
      "014cb63097fc7dbda3edf53eb09802237961cbb4c9e9abd705f23b86511b0a69"
      default))
- '(package-selected-packages
-   '(yaml-mode xterm-color treemacs-magit treemacs-icons-dired
-               tree-sitter-langs terraform-mode slime setup
-               rainbow-mode pdf-tools lsp-java kubernetes json-mode
-               ido-grid-mode ido-completing-read+ hl-todo
-               graphviz-dot-mode gradle-mode dumb-jump doom-themes
-               cuda-mode company cider amx)))
+ '(package-selected-packages nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
