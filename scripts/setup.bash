@@ -8,6 +8,7 @@ if sudo -v; then
   PLATFORM="$(uname -s)"
   case ${PLATFORM} in
     Linux*)     if sudo -v; then
+                  sudo apt-get update -qy
                   sudo apt-get install -qy \
 	                   build-essential \
 	                   gcc-10 \

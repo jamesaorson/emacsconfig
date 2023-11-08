@@ -29,8 +29,9 @@
 (defvar emacs-version-major (string-to-number (car (split-string emacs-version "\\."))))
 
 ;; Load manual packages
-(require 'move-text)
 (require 'current-window-only)
+(require 'dockerfile-mode)
+(require 'move-text)
 
 ;; Install community packages
 (install-packages
@@ -157,6 +158,14 @@
 
 (defun configure-current-window-only ()
   (current-window-only-mode t))
+
+(defun configure-dockerfile-mode ()
+  (defun -configure-dockerfile-mode ()
+    (when (and (stringp buffer-file-name)
+               (string-match "\\Dockerfile\\'" buffer-file-name))
+      (dockerfile-mode)))
+
+  (add-hook 'find-file-hook '-configure-dockerfile-mode))
 
 (defun configure-hotkeys ()
   (global-set-key (kbd "<C-M-up>")    'windmove-up)
@@ -369,6 +378,7 @@
 (configure-antlr-mode)
 (configure-column-mode)
 (configure-company)
+(configure-dockerfile-mode)
 (configure-hotkeys)
 (configure-ido)
 (configure-indent)
@@ -438,7 +448,14 @@
      "c517e98fa036a0c21af481aadd2bdd6f44495be3d4ac2ce9d69201fcb2578533"
      "014cb63097fc7dbda3edf53eb09802237961cbb4c9e9abd705f23b86511b0a69"
      default))
- '(package-selected-packages nil))
+ '(package-selected-packages
+   '(yaml-mode xterm-color treemacs-magit treemacs-icons-dired
+               tree-sitter-langs terraform-mode slime setup
+               rainbow-mode pdf-tools lsp-java kubernetes json-mode
+               ido-grid-mode ido-completing-read+ hl-todo
+               graphviz-dot-mode gradle-mode dumb-jump doom-themes
+               cuda-mode company cider amx all-the-icons))
+ '(safe-local-variable-values '((dockerfile-image-name . "nixconfig"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
