@@ -1,5 +1,5 @@
 [submodule "src"]
 	path = src
 	url = https://github.com/emacs-mirror/emacs.git
-        shallow = true
+	shallow = true
 
