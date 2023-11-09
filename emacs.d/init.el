@@ -165,7 +165,8 @@
                (string-match "\\Dockerfile\\'" buffer-file-name))
       (dockerfile-mode)))
 
-  (add-hook 'find-file-hook '-configure-dockerfile-mode))
+  (add-hook 'find-file-hook '-configure-dockerfile-mode)
+  (setq dockerfile-build-progress 'plain))
 
 (defun configure-hotkeys ()
   (global-set-key (kbd "<C-M-up>")    'windmove-up)
