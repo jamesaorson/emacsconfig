@@ -53,6 +53,7 @@
    'ido-completing-read+
    'ido-grid-mode
    'json-mode
+   'toml-mode
    'xterm-color))
 (when (>= emacs-version-major 25)
   (install-packages
