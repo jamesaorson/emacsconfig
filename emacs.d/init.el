@@ -450,7 +450,7 @@
      "014cb63097fc7dbda3edf53eb09802237961cbb4c9e9abd705f23b86511b0a69"
      default))
  '(package-selected-packages
-   '(yaml-mode xterm-color treemacs-magit treemacs-icons-dired
+   '(toml-mode yaml-mode xterm-color treemacs-magit treemacs-icons-dired
                tree-sitter-langs terraform-mode slime setup
                rainbow-mode pdf-tools lsp-java kubernetes json-mode
                ido-grid-mode ido-completing-read+ hl-todo
