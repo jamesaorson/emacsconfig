@@ -38,6 +38,7 @@ if sudo -v; then
 	                   libsystemd-dev \
 	                   libtiff-dev \
 	                   libtinfo-dev \
+                       libtree-sitter-dev \
 	                   libwebkit2gtk-4.0-dev \
 	                   libwebp-dev \
 	                   libx11-dev \
@@ -59,11 +60,6 @@ if sudo -v; then
 	                   texlive \
 	                   xaw3dg-dev \
 	                   zlib1g-dev
-
-                  TREE_SITTER=libtree-sitter-dev
-                  if [[ $(apt-cache search ${TREE_SITTER}) != "" ]]; then
-	                sudo apt-get install -qy ${TREE_SITTER}
-                  fi
                 fi
                 CONFIGURE_ARGS=$(cat <<-EOF
 --with-cairo \
@@ -73,7 +69,7 @@ if sudo -v; then
 --with-json \
 --with-modules \
 --with-native-compilation \
---with-tree-sitter=ifavailable \
+--with-tree-sitter \
 --with-x \
 --with-xft \
 --with-xml2 \

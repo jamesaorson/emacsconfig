@@ -23,7 +23,7 @@
    (lambda (package)
      (if (package-installed-p package)
          nil
-         (package-install package)))
+       (package-install package)))
    packages))
 
 (defvar emacs-version-major (string-to-number (car (split-string emacs-version "\\."))))
@@ -44,8 +44,7 @@
  'slime
  ;; [DOCS](https://github.com/hcl-emacs/terraform-mode)
  'terraform-mode
- 'yaml-mode
- )
+ 'yaml-mode)
 (when (>= emacs-version-major 24)
   (install-packages
    'all-the-icons
@@ -62,9 +61,7 @@
    'hl-todo
    'kubernetes
    ;; [DOCS](https://magit.vc/) 
-   'magit
-   'tree-sitter
-   'tree-sitter-langs))
+   'magit))
 (when (>= emacs-version-major 26)
   (install-packages
    ;; [DOCS](https://github.com/clojure-emacs/cider)
@@ -247,6 +244,29 @@
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
 
+(defun configure-tree-sitter ()
+  (setq treesit-language-source-alist
+        '((c "https://github.com/tree-sitter/tree-sitter-c")
+          (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
+          (cmake "https://github.com/uyha/tree-sitter-cmake")
+          (commonlisp "https://github.com/theHamsta/tree-sitter-commonlisp")
+          (css "https://github.com/tree-sitter/tree-sitter-css")
+          (dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile")
+          (go "https://github.com/tree-sitter/tree-sitter-go")
+          (html "https://github.com/tree-sitter/tree-sitter-html")
+          (java "https://github.com/tree-sitter/tree-sitter-java")
+          (json "https://github.com/tree-sitter/tree-sitter-json")
+          (make "https://github.com/alemuller/tree-sitter-make")
+          (org "https://github.com/milisims/tree-sitter-org")
+          (python "https://github.com/tree-sitter/tree-sitter-python")
+          (ruby "https://github.com/tree-sitter/tree-sitter-ruby")
+          (rust "https://github.com/tree-sitter/tree-sitter-rust")
+          (scheme "https://github.com/6cdh/tree-sitter-scheme")
+          (toml "https://github.com/ikatyang/tree-sitter-toml")
+          (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
+  (setq major-mode-remap-alist
+        '((c-mode . c-ts-mode))))
+
 (defun configure-treemacs ()
   (when treemacs-python-executable
     (treemacs-git-commit-diff-mode t))
@@ -330,9 +350,9 @@
   ;; Sets up exec-path-from shell
   ;; https://github.com/purcell/exec-path-from-shell
   (setup 
-   (when (memq window-system '(mac ns))
-     (:package exec-path-from-shell)
-     (exec-path-from-shell-initialize))))
+      (when (memq window-system '(mac ns))
+        (:package exec-path-from-shell)
+        (exec-path-from-shell-initialize))))
 
 (defun configure-xterm ()
   ;; BEGIN XTERM
@@ -388,6 +408,7 @@
 (configure-slime)
 (configure-tab-mode)
 (configure-terraform-mode)
+(configure-tree-sitter)
 (configure-treemacs)
 (configure-tex)
 (configure-tramp-mode)
@@ -395,6 +416,14 @@
 (configure-xterm)
 
 (configure-theme)
+
+;; Interactive functions
+(defun bootstrap-tree-sitter-grammars ()
+  "Installs tree sitter grammars from source. treesit-language-source-alist contains the grammars to install"
+  (interactive)
+  (defun -install-grammar (grammar)
+    (treesit-install-language-grammar grammar))
+  (mapc #'-install-grammar (mapcar #'car treesit-language-source-alist)))
 
 ;; Make gc pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
@@ -450,13 +479,7 @@
      "c517e98fa036a0c21af481aadd2bdd6f44495be3d4ac2ce9d69201fcb2578533"
      "014cb63097fc7dbda3edf53eb09802237961cbb4c9e9abd705f23b86511b0a69"
      default))
- '(package-selected-packages
-   '(toml-mode yaml-mode xterm-color treemacs-magit treemacs-icons-dired
-               tree-sitter-langs terraform-mode slime setup
-               rainbow-mode pdf-tools lsp-java kubernetes json-mode
-               ido-grid-mode ido-completing-read+ hl-todo
-               graphviz-dot-mode gradle-mode dumb-jump doom-themes
-               cuda-mode company cider amx all-the-icons))
+ '(package-selected-packages nil)
  '(safe-local-variable-values '((dockerfile-image-name . "nixconfig"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
