@@ -6,7 +6,9 @@
 
 (fset 'yes-or-no-p 'y-or-n-p)     ;; changes all yes/no questions to y/n type
 
-(set-face-attribute 'default nil :font "FiraMono Nerd Font Mono")
+(set-face-attribute 'default nil
+                    :font "FiraMono Nerd Font Mono"
+                    :height 100)
 
 ;;; Emacs Load Path
 (add-to-list 'load-path "~/.emacs.d/packages/")
@@ -38,8 +40,11 @@
  'cuda-mode
  'doom-themes
  'dumb-jump
+ 'golden-ratio
  ;; [DOCS](https://github.com/jacobono/emacs-gradle-mode/tree/master)
  'gradle-mode
+ 'indent-guide
+ 'restart-emacs
  'setup
  'slime
  ;; [DOCS](https://github.com/hcl-emacs/terraform-mode)
@@ -67,10 +72,7 @@
    ;; [DOCS](https://github.com/clojure-emacs/cider)
    'cider
    ;; [DOCS](https://github.com/vedang/pdf-tools)
-   'pdf-tools
-   'treemacs
-   'treemacs-icons-dired
-   'treemacs-magit))
+   'pdf-tools))
 (when (>= emacs-version-major 27)
   (install-packages
    'markdown-mode))
@@ -198,7 +200,6 @@
   (dolist (mode '(org-mode-hook
                   term-mode-hook
                   shell-mode-hook
-                  treemacs-mode-hook
                   eshell-mode-hook))
     (add-hook mode (lambda () (display-line-numbers-mode 0)))))
 
@@ -238,9 +239,6 @@
   (doom-themes-visual-bell-config)
   ;; Enable custom neotree theme (all-the-icons must be installed!)
   ;;(doom-themes-neotree-config)
-  ;; or for treemacs users
-  (setq doom-themes-treemacs-theme "doom-one") ; use "doom-colors" for less minimal icon theme
-  (doom-themes-treemacs-config)
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
 
@@ -266,27 +264,6 @@
           (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
   (setq major-mode-remap-alist
         '((c-mode . c-ts-mode))))
-
-(defun configure-treemacs ()
-  (when treemacs-python-executable
-    (treemacs-git-commit-diff-mode t))
-
-  (pcase (cons (not (null (executable-find "git")))
-               (not (null treemacs-python-executable)))
-    (`(t . t)
-     (treemacs-git-mode 'deferred))
-    (`(t . _)
-     (treemacs-git-mode 'simple)))
-
-  (treemacs-hide-gitignored-files-mode nil)
-
-  (use-package treemacs-icons-dired
-    :hook (dired-mode . treemacs-icons-dired-enable-once)
-    :ensure nil)
-
-  (use-package treemacs-magit
-    :after (treemacs magit)
-    :ensure nil))
 
 (defun configure-tramp-mode ()
   "Source: https://www.emacswiki.org/emacs/TrampMode#h5o-4 - Configures tramp mode and fixes the shell defaults"
@@ -352,7 +329,11 @@
   (setup 
       (when (memq window-system '(mac ns))
         (:package exec-path-from-shell)
-        (exec-path-from-shell-initialize))))
+        (exec-path-from-shell-initialize)))
+  
+  ;; Enable golden ratio windows
+  (golden-ratio-mode 1)
+  (indent-guide-global-mode))
 
 (defun configure-xterm ()
   ;; BEGIN XTERM
@@ -409,7 +390,6 @@
 (configure-tab-mode)
 (configure-terraform-mode)
 (configure-tree-sitter)
-(configure-treemacs)
 (configure-tex)
 (configure-tramp-mode)
 (configure-other)
@@ -479,7 +459,13 @@
      "c517e98fa036a0c21af481aadd2bdd6f44495be3d4ac2ce9d69201fcb2578533"
      "014cb63097fc7dbda3edf53eb09802237961cbb4c9e9abd705f23b86511b0a69"
      default))
- '(package-selected-packages nil)
+ '(package-selected-packages
+   '(indent-guide golden-ratio yaml-mode xterm-color toml-mode
+                  terraform-mode slime setup restart-emacs
+                  rainbow-mode pdf-tools lsp-java kubernetes json-mode
+                  ido-grid-mode ido-completing-read+ hl-todo
+                  graphviz-dot-mode gradle-mode dumb-jump doom-themes
+                  cuda-mode company cider amx all-the-icons))
  '(safe-local-variable-values '((dockerfile-image-name . "nixconfig"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
