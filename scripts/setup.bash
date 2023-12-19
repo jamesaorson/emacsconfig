@@ -57,6 +57,7 @@ if sudo -v; then
 	                   libxv-dev \
 	                   libz-dev \
                        ripgrep \
+                       texinfo \
 	                   texlive \
 	                   xaw3dg-dev \
 	                   zlib1g-dev
