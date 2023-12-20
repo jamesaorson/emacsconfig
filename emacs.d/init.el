@@ -2,6 +2,10 @@
 (require 'package)
 (require 'eshell)
 
+;; Holo layer
+(require 'holo-layer)
+(holo-layer-enable)
+
 (setq read-process-output-max (* 1024 1024)) ;; 1mb
 
 (fset 'yes-or-no-p 'y-or-n-p)     ;; changes all yes/no questions to y/n type

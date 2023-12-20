@@ -59,12 +59,23 @@ if sudo -v; then
 	                   libxtst-dev \
 	                   libxv-dev \
 	                   libz-dev \
+                       python3 \
+                       python3-pip \
                        ripgrep \
                        texinfo \
 	                   texlive \
 	                   xaw3dg-dev \
 	                   zlib1g-dev
                 fi
+                pip3 install \
+                    epc \
+                    sexpdata \
+                    six \
+                    pynput \
+                    inflect \
+                    PyQt6 \
+                    PyQt6-Qt6 \
+                    PyQt6-sip
                 CONFIGURE_ARGS=$(cat <<-EOF
 --without-compress-install \
 --with-cairo \
