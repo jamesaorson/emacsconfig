@@ -110,8 +110,9 @@ cd ../src
 ./autogen.sh
 ./configure \
   --prefix=${LOCAL_DIR} \
-  ${CONFIGURE_ARGS}
-make -j16
+  ${CONFIGURE_ARGS} \
+  CFLAGS="-O3 -march=native -pipe"
+make -j$(nproc)
 make install
 cd ..
 
