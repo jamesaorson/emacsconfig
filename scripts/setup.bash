@@ -27,6 +27,7 @@ if sudo -v; then
 	                   libharfbuzz-bin \
 	                   libharfbuzz-dev \
 	                   libice-dev \
+                       libjansson4 \
 	                   libjansson-dev \
 	                   libjpeg-dev \
 	                   libm17n-dev \
