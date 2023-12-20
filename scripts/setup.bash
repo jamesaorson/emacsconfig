@@ -13,12 +13,12 @@ if sudo -v; then
                   sudo apt-get update -qy
                   sudo apt-get install -qy \
 	                   build-essential \
-	                   gcc-10 \
+	                   gcc-12 \
 	                   graphviz \
 	                   libacl1-dev \
 	                   libc6-dev \
 	                   libdbus-1-dev \
-	                   libgccjit-10-dev \
+	                   libgccjit-12-dev \
 	                   libgconf2-dev \
 	                   libgif-dev \
 	                   libgnutls28-dev \
@@ -79,7 +79,7 @@ if sudo -v; then
 --with-xml2 \
 --with-xwidgets \
 --with-x-toolkit=gtk3 \
-CC=gcc-10
+CC=gcc-12
 EOF
 )
                 ;;
