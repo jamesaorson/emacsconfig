@@ -66,6 +66,7 @@ if sudo -v; then
 	                   zlib1g-dev
                 fi
                 CONFIGURE_ARGS=$(cat <<-EOF
+--without-compress-install \
 --with-cairo \
 --with-gconf \
 --with-gnutls \
