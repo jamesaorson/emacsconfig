@@ -4,6 +4,8 @@ set -euox pipefail
 
 cd $(dirname ${BASH_SOURCE[0]})
 
+CONFIGURE_ARGS=""
+
 if sudo -v; then
   PLATFORM="$(uname -s)"
   case ${PLATFORM} in
@@ -68,8 +70,9 @@ if sudo -v; then
 --with-gnutls \
 --with-imagemagick \
 --with-json \
+--with-mailutils \
 --with-modules \
---with-native-compilation \
+--with-native-compilation=aot \
 --with-tree-sitter \
 --with-x \
 --with-xft \
@@ -89,6 +92,7 @@ EOF
   --disable-silent-rules \
   --with-cocoa \
   --with-gnutls \
+  --with-mailutils \
   --with-modules \
   --with-ns \
   --with-tree-sitter \
