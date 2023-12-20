@@ -2,10 +2,6 @@
 (require 'package)
 (require 'eshell)
 
-;; Holo layer
-(require 'holo-layer)
-(holo-layer-enable)
-
 (setq read-process-output-max (* 1024 1024)) ;; 1mb
 
 (fset 'yes-or-no-p 'y-or-n-p)     ;; changes all yes/no questions to y/n type
@@ -170,6 +166,15 @@
 
   (add-hook 'find-file-hook '-configure-dockerfile-mode)
   (setq dockerfile-build-progress 'plain))
+
+(defun configure-holo-layer ()
+  ;; Holo layer
+  (require 'holo-layer)
+  (setq
+    holo-layer-enable-cursor-animation t)
+  ;; NOTE: Must enable after setting options
+  (holo-layer-enable))
+
 
 (defun configure-hotkeys ()
   (global-set-key (kbd "<C-M-up>")    'windmove-up)
@@ -388,6 +393,7 @@
 (configure-column-mode)
 (configure-company)
 (configure-dockerfile-mode)
+(configure-holo-layer)
 (configure-hotkeys)
 (configure-ido)
 (configure-indent)
