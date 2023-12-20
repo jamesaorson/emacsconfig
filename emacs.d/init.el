@@ -167,15 +167,6 @@
   (add-hook 'find-file-hook '-configure-dockerfile-mode)
   (setq dockerfile-build-progress 'plain))
 
-(defun configure-holo-layer ()
-  ;; Holo layer
-  (require 'holo-layer)
-  (setq
-    holo-layer-enable-cursor-animation t)
-  ;; NOTE: Must enable after setting options
-  (holo-layer-enable))
-
-
 (defun configure-hotkeys ()
   (global-set-key (kbd "<C-M-up>")    'windmove-up)
   (global-set-key (kbd "<C-M-down>")  'windmove-down)
@@ -393,7 +384,6 @@
 (configure-column-mode)
 (configure-company)
 (configure-dockerfile-mode)
-(configure-holo-layer)
 (configure-hotkeys)
 (configure-ido)
 (configure-indent)
