@@ -71,6 +71,7 @@
   (install-packages
    ;; [DOCS](https://github.com/clojure-emacs/cider)
    'cider
+   'dashboard
    ;; [DOCS](https://github.com/vedang/pdf-tools)
    'pdf-tools))
 (when (>= emacs-version-major 27)
@@ -333,7 +334,9 @@
   
   ;; Enable golden ratio windows
   (golden-ratio-mode 1)
-  (indent-guide-global-mode))
+  (indent-guide-global-mode)
+
+  (dashboard-setup-startup-hook))
 
 (defun configure-xterm ()
   ;; BEGIN XTERM
