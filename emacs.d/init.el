@@ -65,7 +65,6 @@
    'magit))
 (when (>= emacs-version-major 26)
   (install-packages
-   'dashboard
    ;; [DOCS](https://github.com/vedang/pdf-tools)
    'pdf-tools))
 (when (>= emacs-version-major 27)
@@ -323,10 +322,7 @@
   
   ;; Enable golden ratio windows
   (golden-ratio-mode 1)
-  (indent-guide-global-mode)
-
-  (dashboard-setup-startup-hook)
-  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))))
+  (indent-guide-global-mode))
 
 (defun configure-xterm ()
   ;; BEGIN XTERM
