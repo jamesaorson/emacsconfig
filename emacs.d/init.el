@@ -58,9 +58,10 @@
 (when (>= emacs-version-major 25)
   (install-packages
    'company
+   'flycheck
    'graphviz-dot-mode
    'hl-todo
-   ;; [DOCS](https://magit.vc/) 
+   ;; [DOCS](https://magit.vc/)
    'magit))
 (when (>= emacs-version-major 26)
   (install-packages
@@ -70,6 +71,9 @@
 (when (>= emacs-version-major 27)
   (install-packages
    'markdown-mode))
+(when (>= emacs-version-major 28)
+  (install-packages
+   'flycheck-eglot))
 ;; [DOCS](https://github.com/emacsmirror/rainbow-mode)
 (when (>= emacs-version-major 29)
   (install-packages
@@ -139,6 +143,8 @@
   (setq column-number-mode t))
 
 (defun configure-company ()
+  (setq company-dabbrev-downcase 0)
+  (setq company-idle-delay 0)
   (add-hook 'after-init-hook 'global-company-mode))
 
 (defun configure-current-window-only ()
@@ -152,6 +158,9 @@
 
   (add-hook 'find-file-hook '-configure-dockerfile-mode)
   (setq dockerfile-build-progress 'plain))
+
+(defun configure-flycheck ()
+  (global-flycheck-mode t))
 
 (defun configure-hotkeys ()
   (global-set-key (kbd "<C-M-up>")    'windmove-up)
@@ -364,6 +373,7 @@
 (configure-column-mode)
 (configure-company)
 (configure-dockerfile-mode)
+(configure-flycheck)
 (configure-hotkeys)
 (configure-ido)
 (configure-indent)
