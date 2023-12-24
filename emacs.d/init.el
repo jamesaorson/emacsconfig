@@ -37,16 +37,11 @@
 
 ;; Install community packages
 (install-packages
- 'cuda-mode
  'doom-themes
- 'dumb-jump
  'golden-ratio
- ;; [DOCS](https://github.com/jacobono/emacs-gradle-mode/tree/master)
- 'gradle-mode
  'indent-guide
  'restart-emacs
  'setup
- 'slime
  ;; [DOCS](https://github.com/hcl-emacs/terraform-mode)
  'terraform-mode
  'yaml-mode)
@@ -58,13 +53,13 @@
    'ido-grid-mode
    'json-mode
    'toml-mode
+   'which-key
    'xterm-color))
 (when (>= emacs-version-major 25)
   (install-packages
    'company
    'graphviz-dot-mode
    'hl-todo
-   'kubernetes
    ;; [DOCS](https://magit.vc/) 
    'magit))
 (when (>= emacs-version-major 26)
@@ -78,7 +73,6 @@
 ;; [DOCS](https://github.com/emacsmirror/rainbow-mode)
 (when (>= emacs-version-major 29)
   (install-packages
-   'lsp-java
    'lsp-mode
    'rainbow-mode))
 
@@ -116,16 +110,16 @@
 (setq auto-save-default nil)
 
 ;; comments
-(defun toggle-comment-on-line ()
+(defun toggle-comment-line ()
   "comment or uncomment current line"
   (interactive)
   (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
 (global-set-key (kbd "C-;") 'toggle-comment-on-line)
 
-;; use 2 spaces for tabs
+;; use 4 spaces for tabs
 (defun die-tabs ()
   (interactive)
-  (set-variable 'tab-width 2)
+  (set-variable 'tab-width 4)
   (mark-whole-buffer)
   (untabify (region-beginning) (region-end))
   (keyboard-quit))
@@ -140,14 +134,6 @@
 (setq electric-indent-mode nil)
 
 ;; Configuration
-
-(defun configure-antlr-mode ()
-  (defun -configure-antlr-mode ()
-    (when (and (stringp buffer-file-name)
-               (string-match "\\.g4\\'" buffer-file-name))
-      (antlr-mode)))
-
-  (add-hook 'find-file-hook '-configure-antlr-mode))
 
 (defun configure-column-mode ()
   (setq column-number-mode t))
@@ -187,10 +173,6 @@
   (setq-default tab-width 4)
   (setq indent-line-function 'insert-tab))
 
-(defun configure-java ()
-  (require 'lsp-java)
-  (add-hook 'java-mode-hook #'lsp))
-
 (defun configure-line-mode ()
   (global-display-line-numbers-mode 1)
   (setq display-line-numbers-type 'relative)
@@ -213,9 +195,6 @@
   "Source: https://www.reddit.com/r/emacs/comments/sy1n1f/globallinummode_1_causing_issues_with_pdf_viewing/"
   (add-hook 'pdf-view-mode-hook #'-unconfigure-line-mode-local)
   (pdf-tools-install))
-
-(defun configure-slime ()
-  (setq inferior-lisp-program "sbcl"))
 
 (defun configure-tab-mode ()
   (global-tab-line-mode)
@@ -268,6 +247,9 @@
   "Source: https://www.emacswiki.org/emacs/TrampMode#h5o-4 - Configures tramp mode and fixes the shell defaults"
   (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
   (setq tramp-shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"))
+
+(defun configure-which-key ()
+  (which-key-mode))
 
 (defun configure-other ()
   (global-hl-todo-mode t)
@@ -376,11 +358,9 @@
   )
 
 (when (>= emacs-version-major 29)
-  (configure-java)
   (configure-line-mode)
   (configure-pdf-mode))
 
-(configure-antlr-mode)
 (configure-column-mode)
 (configure-company)
 (configure-dockerfile-mode)
@@ -388,12 +368,12 @@
 (configure-ido)
 (configure-indent)
 (configure-move-text)
-(configure-slime)
 (configure-tab-mode)
 (configure-terraform-mode)
 (configure-tree-sitter)
 (configure-tex)
 (configure-tramp-mode)
+(configure-which-key)
 (configure-other)
 (configure-xterm)
 
