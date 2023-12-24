@@ -1,3 +1,5 @@
+
+
 ;; Package Management
 (require 'package)
 (require 'eshell)
@@ -42,6 +44,7 @@
  'indent-guide
  'restart-emacs
  'setup
+ 'simple-httpd
  ;; [DOCS](https://github.com/hcl-emacs/terraform-mode)
  'terraform-mode
  'yaml-mode)
