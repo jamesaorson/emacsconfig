@@ -75,7 +75,8 @@
    'markdown-mode))
 (when (>= emacs-version-major 28)
   (install-packages
-   'flycheck-eglot))
+   'flycheck-eglot
+   'geiser-mit))
 ;; [DOCS](https://github.com/emacsmirror/rainbow-mode)
 (when (>= emacs-version-major 29)
   (install-packages
