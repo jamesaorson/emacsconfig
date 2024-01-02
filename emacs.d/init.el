@@ -1,5 +1,3 @@
-
-
 ;; Package Management
 (require 'package)
 (require 'eshell)
@@ -52,6 +50,7 @@
   (install-packages
    'all-the-icons
    'amx
+   'eradio
    'ido-completing-read+
    'ido-grid-mode
    'json-mode
@@ -207,6 +206,11 @@
   "Source: https://www.reddit.com/r/emacs/comments/sy1n1f/globallinummode_1_causing_issues_with_pdf_viewing/"
   (add-hook 'pdf-view-mode-hook #'-unconfigure-line-mode-local)
   (pdf-tools-install))
+
+(defun configure-eradio ()
+  (setq eradio-player '("mpv" "--no-video" "--no-terminal"))
+  (setq eradio-channels '(("Name" . "radio url")
+                          ("Name" . "radio url"))))
 
 (defun configure-tab-mode ()
   (global-tab-line-mode)
@@ -373,6 +377,7 @@
 (configure-column-mode)
 (configure-company)
 (configure-dockerfile-mode)
+(configure-eradio)
 (configure-flycheck)
 (configure-hotkeys)
 (configure-ido)
