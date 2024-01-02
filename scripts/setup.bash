@@ -113,6 +113,7 @@ fi
 LOCAL_DIR=${HOME}/.local
 
 cd ../src
+pwd
 ./autogen.sh
 ./configure \
   --prefix=${LOCAL_DIR} \
