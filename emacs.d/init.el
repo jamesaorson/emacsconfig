@@ -75,7 +75,7 @@
 (when (>= emacs-version-major 28)
   (install-packages
    'flycheck-eglot
-   'geiser-mit))
+   'geiser-guile))
 ;; [DOCS](https://github.com/emacsmirror/rainbow-mode)
 (when (>= emacs-version-major 29)
   (install-packages
@@ -211,6 +211,9 @@
   (setq eradio-player '("mpv" "--no-video" "--no-terminal"))
   (setq eradio-channels '(("Name" . "radio url")
                           ("Name" . "radio url"))))
+
+(defun configure-scheme ()
+  (setq geiser-active-implementations '(guile)))
 
 (defun configure-tab-mode ()
   (global-tab-line-mode)
@@ -383,6 +386,7 @@
 (configure-ido)
 (configure-indent)
 (configure-move-text)
+(configure-scheme)
 (configure-tab-mode)
 (configure-terraform-mode)
 (configure-tree-sitter)
