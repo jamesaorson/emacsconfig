@@ -19,7 +19,6 @@ if sudo -v; then
 	                   libc6-dev \
 	                   libdbus-1-dev \
 	                   libgccjit-12-dev \
-	                   libgconf-2-4 \
 	                   libgif-dev \
 	                   libgnutls28-dev \
 	                   libgpm-dev \
