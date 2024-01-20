@@ -39,7 +39,7 @@ if sudo -v; then
 	                   libsm-dev \
 	                   libsystemd-dev \
 	                   libtiff-dev \
-	                   libtinfo-dev \
+	                   libtinfo6 \
 	                   libtree-sitter-dev \
 	                   libwebkit2gtk-4.0-dev \
 	                   libwebp-dev \
