@@ -26,21 +26,21 @@ if sudo -v; then
 	                   libharfbuzz-bin \
 	                   libharfbuzz-dev \
 	                   libice-dev \
-                       libjansson4 \
+	                   libjansson4 \
 	                   libjansson-dev \
 	                   libjpeg-dev \
 	                   libm17n-dev \
 	                   libmagickcore-dev \
 	                   libmagickwand-dev \
-	                   libncurses5-dev \
+	                   libncurses-dev \
 	                   libotf-dev \
 	                   libpng-dev \
 	                   librsvg2-dev \
 	                   libsm-dev \
 	                   libsystemd-dev \
 	                   libtiff-dev \
-	                   libtinfo6 \
-                       libtree-sitter-dev \
+	                   libtinfo-dev \
+	                   libtree-sitter-dev \
 	                   libwebkit2gtk-4.0-dev \
 	                   libwebp-dev \
 	                   libx11-dev \
@@ -58,8 +58,8 @@ if sudo -v; then
 	                   libxtst-dev \
 	                   libxv-dev \
 	                   libz-dev \
-                       ripgrep \
-                       texinfo \
+	                   ripgrep \
+	                   texinfo \
 	                   texlive \
 	                   xaw3dg-dev \
 	                   zlib1g-dev
