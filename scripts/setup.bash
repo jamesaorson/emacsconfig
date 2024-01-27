@@ -85,6 +85,7 @@ EOF
 )
                 ;;
     Darwin*)    brew install \
+                     gmp \
                      gnutls \
                      ripgrep \
                      texinfo \
