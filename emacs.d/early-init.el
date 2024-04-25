@@ -1,3 +1,13 @@
+;;; early-init.el --- Early init for Emacs -*- lexical-binding: t; -*-
+
+;; Author: James Orson <jamesaorson@gmail.com>
+;; Maintainer: James Orson <jamesaorson@gmail.com>
+
+;;; Commentary:
+;; Initial startup improvements
+
+;;; Code:
+
 ;; improve startup time by pausing garbage collection during init
 (setq gc-cons-threshold most-positive-fixnum)
 
@@ -22,4 +32,6 @@
 (require 'auto-compile)
 (auto-compile-on-load-mode)
 (auto-compile-on-save-mode)
+
 ;;; early-init.el ends here
+

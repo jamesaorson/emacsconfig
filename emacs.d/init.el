@@ -1,4 +1,13 @@
-;; Package Management
+;;; init.el --- Init for Emacs -*- lexical-binding: t; -*-
+
+;; Author: James Orson <jamesaorson@gmail.com>
+;; Maintainer: James Orson <jamesaorson@gmail.com>
+
+;;; Commentary:
+;; Initial startup improvements
+
+;;; Code:
+
 (require 'package)
 (require 'eshell)
 
@@ -20,7 +29,7 @@
   (package-refresh-contents))
 
 (defun install-packages (&rest packages)
-  "Source: https://stackoverflow.com/a/10095853 - Assures every package is installed, ask for installation if it’s not, and returns a list of installed packages (or nil for every skipped package)"
+  "Install list of PACKAGES.  Source: https://stackoverflow.com/a/10095853 - Assures every package is installed, ask for installation if it’s not, and return a list of installed packages (or nil for every skipped package)."
   (mapcar
    (lambda (package)
      (if (package-installed-p package)
@@ -28,7 +37,7 @@
        (package-install package)))
    packages))
 
-(defvar emacs-version-major (string-to-number (car (split-string emacs-version "\\."))))
+(defvar +emacs-version-major+ (string-to-number (car (split-string emacs-version "\\."))))
 
 ;; Load manual packages
 (require 'current-window-only)
@@ -43,21 +52,18 @@
  'restart-emacs
  'setup
  'simple-httpd
- ;; [DOCS](https://github.com/hcl-emacs/terraform-mode)
- 'terraform-mode
  'yaml-mode)
-(when (>= emacs-version-major 24)
+(when (>= +emacs-version-major+ 24)
   (install-packages
    'all-the-icons
    'amx
-   'eradio
    'ido-completing-read+
    'ido-grid-mode
    'json-mode
    'toml-mode
    'which-key
    'xterm-color))
-(when (>= emacs-version-major 25)
+(when (>= +emacs-version-major+ 25)
   (install-packages
    'company
    'flycheck
@@ -65,19 +71,19 @@
    'hl-todo
    ;; [DOCS](https://magit.vc/)
    'magit))
-(when (>= emacs-version-major 26)
+(when (>= +emacs-version-major+ 26)
   (install-packages
    ;; [DOCS](https://github.com/vedang/pdf-tools)
    'pdf-tools))
-(when (>= emacs-version-major 27)
+(when (>= +emacs-version-major+ 27)
   (install-packages
    'markdown-mode))
-(when (>= emacs-version-major 28)
+(when (>= +emacs-version-major+ 28)
   (install-packages
    'flycheck-eglot
-   'geiser-guile))
+   'geiser-racket))
 ;; [DOCS](https://github.com/emacsmirror/rainbow-mode)
-(when (>= emacs-version-major 29)
+(when (>= +emacs-version-major+ 29)
   (install-packages
    'lsp-mode
    'rainbow-mode))
@@ -117,7 +123,7 @@
 
 ;; comments
 (defun toggle-comment-line ()
-  "comment or uncomment current line"
+  "Comment or uncomment current line."
   (interactive)
   (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
 (global-set-key (kbd "C-;") 'toggle-comment-on-line)
@@ -132,7 +138,7 @@
 
 ;; fix weird os x kill error
 (defun ns-get-pasteboard ()
-  "Returns the value of the pasteboard, or nil for unsupported formats."
+  "Return the value of the pasteboard, or nil for unsupported formats."
   (condition-case nil
       (ns-get-selection-internal 'CLIPBOARD)
     (quit nil)))
@@ -142,17 +148,21 @@
 ;; Configuration
 
 (defun configure-column-mode ()
+  "Add column info to bar."
   (setq column-number-mode t))
 
 (defun configure-company ()
+  "Configure company mode."
   (setq company-dabbrev-downcase 0)
   (setq company-idle-delay 0)
   (add-hook 'after-init-hook 'global-company-mode))
 
 (defun configure-current-window-only ()
+  "Open new buffers in the current window, instead of continually splitting."
   (current-window-only-mode t))
 
 (defun configure-dockerfile-mode ()
+  "Enable dockerfile mode."
   (defun -configure-dockerfile-mode ()
     (when (and (stringp buffer-file-name)
                (string-match "\\Dockerfile\\'" buffer-file-name))
@@ -162,15 +172,18 @@
   (setq dockerfile-build-progress 'plain))
 
 (defun configure-flycheck ()
+  "Enable flycheck mode for basic IDE support in most languages."
   (global-flycheck-mode t))
 
 (defun configure-hotkeys ()
+  "Add various hotkeys that I use in my workflow."
   (global-set-key (kbd "<C-M-up>")    'windmove-up)
   (global-set-key (kbd "<C-M-down>")  'windmove-down)
   (global-set-key (kbd "<C-M-left>")  'windmove-left)
   (global-set-key (kbd "<C-M-right>") 'windmove-right))
 
 (defun configure-ido ()
+  "Enable ido mode."
   (ido-mode 1)
   (ido-grid-mode 1)
   (ido-everywhere 1)
@@ -180,11 +193,13 @@
   (amx-mode 1))
 
 (defun configure-indent ()
+  "Set up default indent."
   (setq-default indent-tabs-mode nil)
-  (setq-default tab-width 4)
+  (setq-default tab-width 2)
   (setq indent-line-function 'insert-tab))
 
 (defun configure-line-mode ()
+  "Display line numbers in gutter."
   (global-display-line-numbers-mode 1)
   (setq display-line-numbers-type 'relative)
   (global-hl-line-mode)
@@ -195,39 +210,33 @@
                   eshell-mode-hook))
     (add-hook mode (lambda () (display-line-numbers-mode 0)))))
 
-(defun -unconfigure-line-mode-local ()
-  "Source: https://www.reddit.com/r/emacs/comments/sy1n1f/globallinummode_1_causing_issues_with_pdf_viewing/ - Disable line numbering in the current buffer"
-  (display-line-numbers-mode -1))
-
 (defun configure-move-text ()
+  "Enable the ability to move text, row by row."
   (move-text-default-bindings))
 
 (defun configure-pdf-mode ()
-  "Source: https://www.reddit.com/r/emacs/comments/sy1n1f/globallinummode_1_causing_issues_with_pdf_viewing/"
+  "Configure PDF viewing settings."
+  (defun -unconfigure-line-mode-local ()
+    (display-line-numbers-mode -1))
   (add-hook 'pdf-view-mode-hook #'-unconfigure-line-mode-local)
   (pdf-tools-install))
 
-(defun configure-eradio ()
-  (setq eradio-player '("mpv" "--no-video" "--no-terminal"))
-  (setq eradio-channels '(("Name" . "radio url")
-                          ("Name" . "radio url"))))
-
-(defun configure-scheme ()
-  (setq geiser-active-implementations '(guile)))
+(defun configure-geiser ()
+  "Configure the version of scheme to use with geiser."
+  (setq geiser-active-implementations '(racket)))
 
 (defun configure-tab-mode ()
+  "Disable tabs in the Emacs GUI."
   (global-tab-line-mode)
   (tab-bar-mode 1))
 
-(defun configure-terraform-mode ()
-  (add-hook 'terraform-mode-hook #'outline-minor-mode))
-
 (defun configure-tex ()
+  "Configure the tex commands to be used in rendering."
   (setq latex-run-command "pdflatex")
   (setq tex-start-options "-shell-escape "))
 
 (defun configure-theme ()
-  ;; Global settings (defaults)
+  "Set the color theme."
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
   (load-theme 'doom-one t)
@@ -240,6 +249,7 @@
   (doom-themes-org-config))
 
 (defun configure-tree-sitter ()
+  "Enable tree sitter grammars for installation via \\[treesit-install-language-grammar]."
   (setq treesit-language-source-alist
         '((c "https://github.com/tree-sitter/tree-sitter-c")
           (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
@@ -263,14 +273,16 @@
         '((c-mode . c-ts-mode))))
 
 (defun configure-tramp-mode ()
-  "Source: https://www.emacswiki.org/emacs/TrampMode#h5o-4 - Configures tramp mode and fixes the shell defaults"
+  "Fix tramp mode issues."
   (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
   (setq tramp-shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"))
 
 (defun configure-which-key ()
+  "Enable which key."
   (which-key-mode))
 
 (defun configure-other ()
+"Miscellaneous crap to configure."
   (global-hl-todo-mode t)
   (setq vc-follow-symlinks t)
   (xterm-mouse-mode nil)
@@ -336,7 +348,7 @@
   (indent-guide-global-mode))
 
 (defun configure-xterm ()
-  ;; BEGIN XTERM
+  "Fix various xterm rendering issues."
   ;; Comint
   (setq comint-output-filter-functions
         (remove 'ansi-color-process-output comint-output-filter-functions))
@@ -369,26 +381,22 @@
     (funcall f proc (xterm-color-filter string)))
 
   (advice-add 'compilation-filter :around #'my/advice-compilation-filter)
-
-  ;; END XTERM
   )
 
-(when (>= emacs-version-major 29)
+(when (>= +emacs-version-major+ 29)
   (configure-line-mode)
   (configure-pdf-mode))
 
 (configure-column-mode)
 (configure-company)
 (configure-dockerfile-mode)
-(configure-eradio)
 (configure-flycheck)
+(configure-geiser)
 (configure-hotkeys)
 (configure-ido)
 (configure-indent)
 (configure-move-text)
-(configure-scheme)
 (configure-tab-mode)
-(configure-terraform-mode)
 (configure-tree-sitter)
 (configure-tex)
 (configure-tramp-mode)
@@ -400,7 +408,7 @@
 
 ;; Interactive functions
 (defun bootstrap-tree-sitter-grammars ()
-  "Installs tree sitter grammars from source. treesit-language-source-alist contains the grammars to install"
+  "Install tree sitter grammars from source.  treesit-language-source-alist contain the grammars to install."
   (interactive)
   (defun -install-grammar (grammar)
     (treesit-install-language-grammar grammar))
@@ -411,3 +419,5 @@
 
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file :noerror)
+
+;;; init.el ends here
