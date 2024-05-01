@@ -53,7 +53,7 @@ jobs:
 
       - name: Release linux
         uses: softprops/action-gh-release@v2
-        if: startsWith(matrix.os, 'ubuntu')
+        if: startsWith(matrix.os, 'ubuntu') && startsWith(github.ref, 'refs/tags/')
         with:
           generate_release_notes: true
           files: |
@@ -61,7 +61,7 @@ jobs:
       
       - name: Release macos
         uses: softprops/action-gh-release@v2
-        if: startsWith(matrix.os, 'macos')
+        if: startsWith(matrix.os, 'macos') && startsWith(github.ref, 'refs/tags/')
         with:
           generate_release_notes: true
           files: |
