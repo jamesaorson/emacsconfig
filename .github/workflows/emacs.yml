@@ -1,0 +1,21 @@
+name: Build emacs
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build
+        run: |
+          ./scripts/setup.bash
+
+      - name: Check
+        run: |
+          which -a emacs
