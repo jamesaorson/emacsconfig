@@ -58,7 +58,8 @@ jobs:
           tar -czvf ${{ github.workspace }}/emacs-${{ matrix.os }}.tar.gz \
             ${{ github.workspace }}/src/nextstep/Emacs.app
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
         with:
           name: emacs-${{ matrix.os }}
           path: ${{ github.workspace }}/emacs-${{ matrix.os }}.tar.gz
