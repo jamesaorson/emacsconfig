@@ -15,6 +15,9 @@ jobs:
           - ubuntu-22.04
           - macos-13
 
+    permissions:
+      contents: write
+
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -36,5 +39,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
+          generate_release_notes: true
           files: |
+            ~/.local/bin/emacs
 
