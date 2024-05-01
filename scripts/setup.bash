@@ -120,5 +120,11 @@ make -j$(nproc)
 make install
 cd ..
 
+set +u
+SKIP_POST=${SKIP_POST:-0}
+set -u
+if SKIP_POST=1; then
+	echo "Skipping post steps"
+	exit 0
+fi
 ./scripts/post.bash
-
