@@ -46,12 +46,24 @@ jobs:
         run: |
           ./scripts/setup.bash
 
-      - name: Check linux
+      - name: Archive [ubuntu]
         if: startsWith(matrix.os, 'ubuntu')
         run: |
-          which -a emacs
+          tar -czvf ${{ github.workspace }}/emacs-${{ matrix.os }}.tar.gz \
+            $(which emacs)
+      
+      - name: Archive [macos]
+        if: startsWith(matrix.os, 'macos')
+        run: |
+          tar -czvf ${{ github.workspace }}/emacs-${{ matrix.os }}.tar.gz \
+            ${{ github.workspace }}/src/nextstep/Emacs.app
 
-      - name: Release linux
+      - uses: actions/upload-artifact@v4
+        with:
+          name: emacs-${{ matrix.os }}
+          path: ${{ github.workspace }}/emacs-${{ matrix.os }}.tar.gz
+
+      - name: Release [ubuntu]
         uses: softprops/action-gh-release@v2
         if: startsWith(matrix.os, 'ubuntu') && startsWith(github.ref, 'refs/tags/')
         with:
@@ -59,7 +71,7 @@ jobs:
           files: |
             ~/.local/bin/emacs
       
-      - name: Release macos
+      - name: Release [macos]
         uses: softprops/action-gh-release@v2
         if: startsWith(matrix.os, 'macos') && startsWith(github.ref, 'refs/tags/')
         with:
