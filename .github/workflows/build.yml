@@ -21,6 +21,9 @@ jobs:
 
     runs-on: ${{ matrix.os }}
 
+    env:
+      HOMEBREW_NO_AUTO_UPDATE: '1'
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -31,6 +34,11 @@ jobs:
       - name: Homebrew install
         if: matrix.os == 'macos-13'
         uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Check CLI tools
+        if: matrix.os == 'macos-13'
+        run: |
+          brew --version
 
       - name: Build
         run: |
