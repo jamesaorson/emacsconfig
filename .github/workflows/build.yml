@@ -9,7 +9,13 @@ on:
 
 jobs:
   mirror:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os:
+          - ubuntu-22.04
+          - macos-13
+
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Checkout code
@@ -25,3 +31,10 @@ jobs:
       - name: Check
         run: |
           which -a emacs
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+
