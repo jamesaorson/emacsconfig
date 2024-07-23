@@ -210,6 +210,10 @@
                   eshell-mode-hook))
     (add-hook mode (lambda () (display-line-numbers-mode 0)))))
 
+(defun configure-lisp ()
+  (load (expand-file-name "~/.quicklisp/slime-helper.el"))
+  (setq inferior-lisp-program "sbcl"))
+
 (defun configure-move-text ()
   "Enable the ability to move text, row by row."
   (move-text-default-bindings))
@@ -395,6 +399,7 @@
 (configure-hotkeys)
 (configure-ido)
 (configure-indent)
+(configure-lisp)
 (configure-move-text)
 (configure-tab-mode)
 (configure-tree-sitter)
