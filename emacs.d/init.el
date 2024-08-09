@@ -81,7 +81,7 @@
 (when (>= +emacs-version-major+ 28)
   (install-packages
    'flycheck-eglot
-   'geiser-racket))
+   'geiser-guile))
 ;; [DOCS](https://github.com/emacsmirror/rainbow-mode)
 (when (>= +emacs-version-major+ 29)
   (install-packages
@@ -227,7 +227,7 @@
 
 (defun configure-geiser ()
   "Configure the version of scheme to use with geiser."
-  (setq geiser-active-implementations '(racket)))
+  (setq geiser-active-implementations '(guile)))
 
 (defun configure-tab-mode ()
   "Disable tabs in the Emacs GUI."
