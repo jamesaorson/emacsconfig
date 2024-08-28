@@ -15,9 +15,9 @@
 
 (fset 'yes-or-no-p 'y-or-n-p)     ;; changes all yes/no questions to y/n type
 
-(set-face-attribute 'default nil
-                    :font "FiraMono Nerd Font Mono"
-                    :height 100)
+(ignore-errors (set-face-attribute 'default nil
+                                   :font "FiraMono Nerd Font Mono"
+                                   :height 100))
 
 ;;; Emacs Load Path
 (add-to-list 'load-path "~/.emacs.d/packages/")
