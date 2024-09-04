@@ -250,7 +250,14 @@
   ;; Enable custom neotree theme (all-the-icons must be installed!)
   ;;(doom-themes-neotree-config)
   ;; Corrects (and improves) org-mode's native fontification.
-  (doom-themes-org-config))
+  (doom-themes-org-config)
+
+  ;; Enables transparency of terminal
+  (defun on-after-init ()
+    (unless (display-graphic-p (selected-frame))
+      (set-face-background 'default "unspecified-bg" (selected-frame))))
+  
+  (add-hook 'window-setup-hook 'on-after-init))
 
 (defun configure-tree-sitter ()
   "Enable tree sitter grammars for installation via \\[treesit-install-language-grammar]."
