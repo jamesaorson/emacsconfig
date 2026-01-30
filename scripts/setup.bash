@@ -85,7 +85,8 @@ Darwin*)    brew install \
 					gmp \
 					gnutls \
 					ripgrep \
-					texinfo
+					texinfo \
+					tree-sitter
 			CONFIGURE_ARGS=$(cat <<-EOF
 --disable-silent-rules \
 --with-cocoa \
@@ -93,6 +94,7 @@ Darwin*)    brew install \
 --with-mailutils \
 --with-modules \
 --with-ns \
+--with-tree-sitter \
 --with-xml2 \
 --without-dbus \
 --without-imagemagick \
