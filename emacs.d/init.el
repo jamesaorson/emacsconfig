@@ -259,30 +259,6 @@
   
   (add-hook 'window-setup-hook 'on-after-init))
 
-(defun configure-tree-sitter ()
-  "Enable tree sitter grammars for installation via \\[treesit-install-language-grammar]."
-  (setq treesit-language-source-alist
-        '((c "https://github.com/tree-sitter/tree-sitter-c")
-          (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
-          (cmake "https://github.com/uyha/tree-sitter-cmake")
-          (commonlisp "https://github.com/theHamsta/tree-sitter-commonlisp")
-          (css "https://github.com/tree-sitter/tree-sitter-css")
-          (dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile")
-          (go "https://github.com/tree-sitter/tree-sitter-go")
-          (html "https://github.com/tree-sitter/tree-sitter-html")
-          (java "https://github.com/tree-sitter/tree-sitter-java")
-          (json "https://github.com/tree-sitter/tree-sitter-json")
-          (make "https://github.com/alemuller/tree-sitter-make")
-          (org "https://github.com/milisims/tree-sitter-org")
-          (python "https://github.com/tree-sitter/tree-sitter-python")
-          (ruby "https://github.com/tree-sitter/tree-sitter-ruby")
-          (rust "https://github.com/tree-sitter/tree-sitter-rust")
-          (scheme "https://github.com/6cdh/tree-sitter-scheme")
-          (toml "https://github.com/ikatyang/tree-sitter-toml")
-          (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
-  (setq major-mode-remap-alist
-        '((c-mode . c-ts-mode))))
-
 (defun configure-tramp-mode ()
   "Fix tramp mode issues."
   (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
@@ -409,7 +385,6 @@
 (configure-lisp)
 (configure-move-text)
 (configure-tab-mode)
-(configure-tree-sitter)
 (configure-tex)
 (configure-tramp-mode)
 (configure-which-key)
@@ -417,14 +392,6 @@
 (configure-xterm)
 
 (configure-theme)
-
-;; Interactive functions
-(defun bootstrap-tree-sitter-grammars ()
-  "Install tree sitter grammars from source.  treesit-language-source-alist contain the grammars to install."
-  (interactive)
-  (defun -install-grammar (grammar)
-    (treesit-install-language-grammar grammar))
-  (mapc #'-install-grammar (mapcar #'car treesit-language-source-alist)))
 
 ;; Make gc pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))

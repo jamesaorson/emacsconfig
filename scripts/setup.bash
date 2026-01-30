@@ -39,7 +39,6 @@ Linux*)     if sudo -v; then
 					libsystemd-dev \
 					libtiff-dev \
 					libtinfo6 \
-					libtree-sitter-dev \
 					libwebkit2gtk-4.0-dev \
 					libwebp-dev \
 					libx11-dev \
@@ -73,7 +72,6 @@ Linux*)     if sudo -v; then
 --with-mailutils \
 --with-modules \
 --with-native-compilation=aot \
---with-tree-sitter \
 --with-x \
 --with-xft \
 --with-xml2 \
@@ -87,8 +85,7 @@ Darwin*)    brew install \
 					gmp \
 					gnutls \
 					ripgrep \
-					texinfo \
-					tree-sitter
+					texinfo
 			CONFIGURE_ARGS=$(cat <<-EOF
 --disable-silent-rules \
 --with-cocoa \
@@ -96,7 +93,6 @@ Darwin*)    brew install \
 --with-mailutils \
 --with-modules \
 --with-ns \
---with-tree-sitter \
 --with-xml2 \
 --without-dbus \
 --without-imagemagick \
