@@ -89,7 +89,7 @@ Darwin*)    brew install \
 					tree-sitter
 			CONFIGURE_ARGS=$(cat <<-EOF
 --disable-silent-rules \
---with-cocoa \
+--with-ns \
 --with-gnutls \
 --with-mailutils \
 --with-modules \
