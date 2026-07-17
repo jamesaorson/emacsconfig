@@ -110,9 +110,10 @@ LOCAL_DIR=${HOME}/.local
 
 cd ../src
 ./autogen.sh
+# shellcheck disable=SC2086
 ./configure \
   --prefix="${LOCAL_DIR}" \
-  "${CONFIGURE_ARGS}" \
+  ${CONFIGURE_ARGS} \
   CFLAGS="-O3 -march=native -pipe"
 # shellcheck disable=SC2046
 make -j bootstrap
