@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/usr/bin/env bash
 
 set -euox pipefail
 
@@ -112,7 +112,7 @@ cd ../src
 ./autogen.sh
 ./configure \
   --prefix="${LOCAL_DIR}" \
-  ${CONFIGURE_ARGS} \
+  "${CONFIGURE_ARGS}" \
   CFLAGS="-O3 -march=native -pipe"
 # shellcheck disable=SC2046
 make -j bootstrap
