@@ -116,7 +116,7 @@ cd ../src
   ${CONFIGURE_ARGS} \
   CFLAGS="-O3 -march=native -pipe"
 # shellcheck disable=SC2046
-make -j8 bootstrap V=1 2>&1 | tee /tmp/emacs-build.log
+make -j4 bootstrap V=1 2>&1 | tee /tmp/emacs-build.log
 
 make install
 cd ..
