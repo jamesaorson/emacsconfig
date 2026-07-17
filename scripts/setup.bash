@@ -2,7 +2,7 @@
 
 set -euox pipefail
 
-cd $(dirname ${BASH_SOURCE[0]})
+cd "$(dirname "${BASH_SOURCE[0]}")"
 
 CONFIGURE_ARGS=""
 
@@ -103,7 +103,7 @@ Darwin*)    brew install \
 EOF
 )
 			;;
-*)          echo "UNKNOWN:${unameOut}"; exit 1;;
+*)          echo "UNKNOWN:${PLATFORM}"; exit 1;;
 esac
 
 LOCAL_DIR=${HOME}/.local
@@ -111,9 +111,10 @@ LOCAL_DIR=${HOME}/.local
 cd ../src
 ./autogen.sh
 ./configure \
-  --prefix=${LOCAL_DIR} \
+  --prefix="${LOCAL_DIR}" \
   ${CONFIGURE_ARGS} \
   CFLAGS="-O3 -march=native -pipe"
+# shellcheck disable=SC2046
 make -j$(nproc)
 make install
 cd ..
@@ -121,7 +122,7 @@ cd ..
 set +u
 SKIP_POST=${SKIP_POST:-0}
 set -u
-if SKIP_POST=1; then
+if [ "${SKIP_POST}" -eq 1 ]; then
 	echo "Skipping post steps"
 	exit 0
 fi

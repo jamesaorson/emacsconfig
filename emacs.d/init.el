@@ -372,7 +372,8 @@
 
 (when (>= +emacs-version-major+ 29)
   (configure-line-mode)
-  (configure-pdf-mode))
+  ; (configure-pdf-mode)
+  )
 
 (configure-column-mode)
 (configure-company)
