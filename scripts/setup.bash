@@ -115,7 +115,7 @@ cd ../src
   ${CONFIGURE_ARGS} \
   CFLAGS="-O3 -march=native -pipe"
 # shellcheck disable=SC2046
-make -j$(nproc)
+make -j bootstrap
 make install
 cd ..
 
