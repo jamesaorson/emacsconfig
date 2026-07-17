@@ -116,7 +116,7 @@ cd ../src
   ${CONFIGURE_ARGS} \
   CFLAGS="-O3 -march=native -pipe"
 # shellcheck disable=SC2046
-make -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc)" bootstrap V=1 2>&1 | tee /tmp/emacs-build.log
+make -j1 bootstrap V=1 2>&1 | tee /tmp/emacs-build.log
 
 make install
 cd ..
