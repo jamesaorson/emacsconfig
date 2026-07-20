@@ -211,7 +211,10 @@
     (add-hook mode (lambda () (display-line-numbers-mode 0)))))
 
 (defun configure-lisp ()
-  (load (expand-file-name "~/.quicklisp/slime-helper.el"))
+  ;; ponytail: swallow slime-helper load errors, quicklisp sometimes leaves a
+  ;; .lisp file at this path; fix by rerunning (quicklisp-slime-helper:install).
+  (with-demoted-errors "slime-helper: %S"
+    (load (expand-file-name "~/.quicklisp/slime-helper.el")))
   (setq inferior-lisp-program "sbcl"))
 
 (defun configure-move-text ()
