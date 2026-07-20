@@ -99,7 +99,9 @@ Darwin*)    brew install \
 --without-dbus \
 --without-imagemagick \
 --without-selinux \
---without-x
+--without-x \
+CC=clang \
+OBJC=clang
 EOF
 )
 			;;
@@ -116,9 +118,17 @@ cd ../src
   ${CONFIGURE_ARGS} \
   CFLAGS="-O3 -march=native -pipe"
 # shellcheck disable=SC2046
-make -j4 bootstrap V=1 2>&1 | tee /tmp/emacs-build.log
+make -j1 bootstrap V=1 2>&1 | tee /tmp/emacs-build.log
 
 make install
+
+case ${PLATFORM} in
+Darwin*)
+	if sudo -v; then
+		sudo ln -sf "$(pwd)/nextstep/Emacs.app" /Applications/Emacs.app
+	fi
+	;;
+esac
 cd ..
 
 set +u
